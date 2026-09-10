@@ -1,0 +1,5 @@
+{
+  "_not": "provinces: üretilecek il slug'ları (boş liste = tüm Türkiye, ÖNERİLMEZ). districts: il başına ilçe filtresi; yoksa ilin tüm ilçeleri.",
+  "provinces": ["istanbul"],
+  "districts": {}
+}
