@@ -5,7 +5,7 @@ export const site = {
   tagline: "Dijitalde büyüyün. Teknolojinizi güçlendirin.",
   description:
     "Web, e-ticaret, dijital pazarlama ve kurumsal IT çözümleriyle işletmenizin dijital ve teknik ihtiyaçlarını tek noktadan yönetiyoruz.",
-  url: "nevatro.com",            // canlıya alınca gerçek domain
+  url: "https://nevatro.com",            // canlıya alınca gerçek domain
   phone: "+90 545 276 52 52",
   phoneHref: "tel:++905452765252",
   whatsapp: "https://wa.me/905452765252", // 90 + numara, boşluksuz
