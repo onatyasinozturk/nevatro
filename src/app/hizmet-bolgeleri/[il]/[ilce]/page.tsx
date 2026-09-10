@@ -12,6 +12,7 @@ import { getLocationContent } from "@/lib/markdown";
 import { byBranch } from "@/data/services";
 import { site } from "@/data/site";
 import { breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { bannerImage, serviceImage } from "@/lib/images";
 
 type Params = Promise<{ il: string; ilce: string }>;
 export const dynamicParams = false;
@@ -49,7 +50,7 @@ export default async function Page({ params }: { params: Params }) {
       <JsonLd data={breadcrumbJsonLd([{ name: "Ana Sayfa", url: site.url }, { name: "Hizmet Bölgeleri", url: `${site.url}/hizmet-bolgeleri` }, { name: p.name, url: `${site.url}/hizmet-bolgeleri/${il}` }, { name: d.name, url }])} />
       <PageHeader kicker={`${p.name} / ${d.name}`} title={c?.title ?? `${loc} yerinde teknik destek ve dijital çözümler`}
         lead={c?.excerpt ?? `${d.name} ve çevresindeki işletmeler için bilgisayar, network, kamera ve alarm sistemlerinde yerinde servis; web, e-ticaret ve reklam tarafında online destek.`}
-        crumbs={[{ name: "Hizmet Bölgeleri", href: "/hizmet-bolgeleri" }, { name: p.name, href: `/hizmet-bolgeleri/${il}` }, { name: d.name }]} />
+        crumbs={[{ name: "Hizmet Bölgeleri", href: "/hizmet-bolgeleri" }, { name: p.name, href: `/hizmet-bolgeleri/${il}` }, { name: d.name }]} image={bannerImage("bolgeler")} />
 
       <section className="container-x py-14 grid lg:grid-cols-[1fr_340px] gap-10">
         <div>
@@ -66,7 +67,7 @@ export default async function Page({ params }: { params: Params }) {
 
           <Reveal className="mt-12"><h2 className="text-2xl font-bold">{loc} yerinde verdiğimiz hizmetler</h2></Reveal>
           <div className="mt-5 grid sm:grid-cols-2 gap-4">
-            {byBranch("it").map((s, i) => <Reveal key={s.slug} delay={i * 60}><ServiceCard s={s} /></Reveal>)}
+            {byBranch("it").map((s, i) => <Reveal key={s.slug} delay={i * 60}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
           </div>
 
           <Reveal className="mt-12"><h2 className="text-2xl font-bold">{d.name} mahalleleri</h2><p className="mt-2 text-sm text-muted">Aşağıdaki mahallelerin tamamına yerinde servis veriyoruz.</p></Reveal>

@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { sectors, getSector } from "@/data/sectors";
+import { bannerImage } from "@/lib/images";
 
 type Params = Promise<{ slug: string }>;
 export function generateStaticParams() { return sectors.map((s) => ({ slug: s.slug })); }
@@ -17,7 +18,7 @@ export default async function Page({ params }: { params: Params }) {
   const s = getSector((await params).slug); if (!s) notFound();
   return (
     <>
-      <PageHeader kicker="Sektörler" title={`${s.name} için çözümler`} lead={s.intro} crumbs={[{ name: "Sektörler", href: "/sektorler" }, { name: s.name }]} />
+      <PageHeader kicker="Sektörler" title={`${s.name} için çözümler`} lead={s.intro} crumbs={[{ name: "Sektörler", href: "/sektorler" }, { name: s.name }]} image={bannerImage("sektorler")} />
       <section className="container-x py-14 grid md:grid-cols-2 gap-8">
         <Reveal className="card p-7 border-l-4 border-l-accent">
           <div className="text-xs font-bold text-muted">Temel sorun</div>

@@ -4,13 +4,14 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { provinces, locative } from "@/lib/locations";
 import { site } from "@/data/site";
+import { bannerImage } from "@/lib/images";
 
 export const metadata: Metadata = { title: "Hizmet Bölgeleri", description: `${site.name} yerinde teknik destek ve dijital çözümler: hizmet verdiğimiz il ve ilçeler.` };
 
 export default function Page() {
   return (
     <>
-      <PageHeader kicker="Hizmet bölgeleri" title="Nerelerde hizmet veriyoruz?" lead={`IT hizmetlerinde ${locative(site.city)} yerinde, dijital hizmetlerde Türkiye geneline online çalışıyoruz.`} crumbs={[{ name: "Hizmet Bölgeleri" }]} />
+      <PageHeader kicker="Hizmet bölgeleri" title="Nerelerde hizmet veriyoruz?" lead={`IT hizmetlerinde ${locative(site.city)} yerinde, dijital hizmetlerde Türkiye geneline online çalışıyoruz.`} crumbs={[{ name: "Hizmet Bölgeleri" }]} image={bannerImage("bolgeler")} />
       <section className="container-x py-14">
         {provinces.map((p) => (
           <Reveal key={p.slug} className="mb-10">

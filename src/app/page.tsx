@@ -8,6 +8,9 @@ import { site } from "@/data/site";
 import { branches, byBranch, services } from "@/data/services";
 import { projects } from "@/data/projects";
 import { provinces, locative } from "@/lib/locations";
+import Image from "next/image";
+import SahaGallery from "@/components/SahaGallery";
+import { heroImage, serviceImage, projectImage, sahaImages } from "@/lib/images";
 
 const why = [
   { t: "Tek noktadan yönetim", d: "Dijital ve teknik süreçlerinizi farklı firmalara bölmek zorunda kalmazsınız." },
@@ -25,29 +28,32 @@ const steps = [
 export default function Home() {
   const ist = provinces.find((p) => p.slug === "istanbul");
   const area = site.serviceArea.map((n) => ist?.districts.find((d) => d.name === n)).filter(Boolean) as { name: string; slug: string }[];
+  const hero = heroImage();
+  const saha = sahaImages();
   const grid = ["web-tasarim", "e-ticaret", "google-ads", "seo", "kurumsal-it", "network-altyapi", "kamera-alarm", "teknik-destek"]
     .map((s) => services.find((x) => x.slug === s)!);
 
   return (
     <>
       {/* HERO */}
-      <section className="bg-surface border-b border-line overflow-hidden">
-        <div className="container-x grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center py-16 md:py-24">
+      <section className={`relative border-b border-line overflow-hidden ${hero ? "bg-primary text-white" : "bg-surface"}`}>
+        {hero && (<><Image src={hero} alt="" fill priority sizes="100vw" className="object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/30" /></>)}
+        <div className="container-x relative grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center py-16 md:py-28">
           <div>
-            <h1 className="text-[2.5rem] md:text-[3.4rem] font-extrabold leading-[1.05]">
+            <h1 className={`text-[2.5rem] md:text-[3.4rem] font-extrabold leading-[1.05] ${hero ? "text-white" : ""}`}>
               <span className="hero-line"><span style={{ "--d": "0ms" } as React.CSSProperties}>Dijitalde büyüyün.</span></span>
               <span className="hero-line"><span style={{ "--d": "140ms" } as React.CSSProperties}>Teknolojinizi güçlendirin.</span></span>
             </h1>
-            <p className="fade-in mt-6 text-lg text-body max-w-[52ch]" style={{ "--d": "420ms" } as React.CSSProperties}>{site.description}</p>
+            <p className={`fade-in mt-6 text-lg max-w-[52ch] ${hero ? "text-white/80" : "text-body"}`} style={{ "--d": "420ms" } as React.CSSProperties}>{site.description}</p>
             <div className="fade-in mt-8 flex flex-wrap gap-3" style={{ "--d": "560ms" } as React.CSSProperties}>
               <Link href={`/hizmetler/${branches.dijital.slug}`} className="btn btn-accent">Dijital Çözümler</Link>
-              <Link href={`/hizmetler/${branches.it.slug}`} className="btn btn-outline">IT Çözümleri</Link>
+              <Link href={`/hizmetler/${branches.it.slug}`} className={`btn ${hero ? "btn-light" : "btn-outline"}`}>IT Çözümleri</Link>
             </div>
-            <div className="fade-in mt-10 pt-6 border-t border-line flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted" style={{ "--d": "760ms" } as React.CSSProperties}>
+            <div className={`fade-in mt-10 pt-6 border-t flex flex-wrap gap-x-6 gap-y-2 text-sm ${hero ? "border-white/20 text-white/60" : "border-line text-muted"}`} style={{ "--d": "760ms" } as React.CSSProperties}>
               {["Web & E-Ticaret", "Google Ads", "IT Destek", "Network", "Kamera Sistemleri"].map((t) => <span key={t}>{t}</span>)}
             </div>
           </div>
-          <div className="fade-in" style={{ "--d": "200ms" } as React.CSSProperties}><HeroVisual /></div>
+          {!hero && <div className="fade-in" style={{ "--d": "200ms" } as React.CSSProperties}><HeroVisual /></div>}
         </div>
       </section>
 
@@ -85,11 +91,13 @@ export default function Home() {
         </div>
       </section>
 
+      <SahaGallery images={saha} />
+
       {/* HİZMETLER GRID */}
       <section className="container-x py-16 md:py-20">
         <Reveal><div className="kicker">Hizmetler</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Tam olarak ne yapıyoruz?</h2></Reveal>
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 90}><ServiceCard s={s} /></Reveal>)}
+          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 90}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
         </div>
         <Reveal className="mt-6 text-sm"><Link href="/hizmetler" className="font-display font-semibold text-accent">Tüm hizmetler</Link></Reveal>
       </section>
@@ -109,7 +117,8 @@ export default function Home() {
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 110}>
               <Link href="/projeler" className="card block overflow-hidden group hover:border-primary transition-colors">
-                <div className={`h-44 ${p.branch === "it" ? "bg-primary" : "bg-accent-soft"} relative`}>
+                <div className={`h-44 ${p.branch === "it" ? "bg-primary" : "bg-accent-soft"} relative overflow-hidden`}>
+                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover" />}
                   <div className={`absolute inset-6 rounded-lg border ${p.branch === "it" ? "border-white/20" : "border-accent/30"}`} />
                   <div className={`absolute left-8 top-8 h-2 w-16 rounded ${p.branch === "it" ? "bg-it" : "bg-accent"}`} />
                   <div className={`absolute left-8 top-14 h-2 w-28 rounded ${p.branch === "it" ? "bg-white/30" : "bg-accent/30"}`} />

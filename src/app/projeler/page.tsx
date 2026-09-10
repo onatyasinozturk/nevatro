@@ -3,6 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
+import Image from "next/image";
+import { projectImage } from "@/lib/images";
 
 export const metadata: Metadata = { title: "Projeler", description: "Web, e-ticaret, network ve güvenlik projelerimizden örnekler." };
 
@@ -14,7 +16,7 @@ export default function Page() {
       <section className="container-x py-14 grid md:grid-cols-3 gap-5">
         {projects.map((p, i) => (
           <Reveal key={p.slug} delay={i * 100} className="card overflow-hidden">
-            <div className={`h-48 ${p.branch === "it" ? "bg-primary" : "bg-accent-soft"}`} />
+            <div className={`h-48 relative ${p.branch === "it" ? "bg-primary" : "bg-accent-soft"}`}>{projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover" />}</div>
             <div className="p-6">
               <h2 className="text-lg font-bold">{p.title}</h2>
               <div className="mt-2 text-xs text-muted">{p.tags.join("  ·  ")}</div>

@@ -6,6 +6,7 @@ import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { provinces, getProvince, locative } from "@/lib/locations";
 import { site } from "@/data/site";
+import { bannerImage } from "@/lib/images";
 
 type Params = Promise<{ il: string }>;
 export const dynamicParams = false;
@@ -19,7 +20,7 @@ export default async function Page({ params }: { params: Params }) {
   const p = getProvince((await params).il); if (!p) notFound();
   return (
     <>
-      <PageHeader kicker="Hizmet bölgeleri" title={`${locative(p.name)} yerinde teknik destek`} lead={`${p.name} genelinde bilgisayar, network ve güvenlik sistemleri için yerinde servis; web, e-ticaret ve reklam için online çalışıyoruz. ${site.serviceArea.slice(0, 3).join(", ")} ve çevresi öncelikli bölgemiz.`} crumbs={[{ name: "Hizmet Bölgeleri", href: "/hizmet-bolgeleri" }, { name: p.name }]} />
+      <PageHeader kicker="Hizmet bölgeleri" title={`${locative(p.name)} yerinde teknik destek`} lead={`${p.name} genelinde bilgisayar, network ve güvenlik sistemleri için yerinde servis; web, e-ticaret ve reklam için online çalışıyoruz. ${site.serviceArea.slice(0, 3).join(", ")} ve çevresi öncelikli bölgemiz.`} crumbs={[{ name: "Hizmet Bölgeleri", href: "/hizmet-bolgeleri" }, { name: p.name }]} image={bannerImage("bolgeler")} />
       <section className="container-x py-14">
         <Reveal><h2 className="text-2xl font-bold">İlçeler</h2></Reveal>
         <div className="mt-5 grid sm:grid-cols-3 lg:grid-cols-4 gap-3">

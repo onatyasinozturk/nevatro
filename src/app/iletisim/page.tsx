@@ -3,13 +3,14 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
+import { bannerImage } from "@/lib/images";
 
 export const metadata: Metadata = { title: "İletişim — Teklif Al", description: "Ücretsiz keşif ve teklif için bize ulaşın. Telefon, WhatsApp veya form." };
 
 export default function Page() {
   return (
     <>
-      <PageHeader kicker="İletişim" title="Projenizi konuşalım" lead="Dijital büyüme, e-ticaret veya teknik altyapı ihtiyacınızı anlatın. Genellikle aynı gün dönüyoruz." crumbs={[{ name: "İletişim" }]} />
+      <PageHeader kicker="İletişim" title="Projenizi konuşalım" lead="Dijital büyüme, e-ticaret veya teknik altyapı ihtiyacınızı anlatın. Genellikle aynı gün dönüyoruz." crumbs={[{ name: "İletişim" }]} image={bannerImage("iletisim")} />
       <section className="container-x py-14 grid lg:grid-cols-[1fr_1.1fr] gap-10 items-start">
         <Reveal>
           <div className="card divide-y divide-line">

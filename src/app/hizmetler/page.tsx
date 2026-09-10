@@ -5,13 +5,14 @@ import ServiceCard from "@/components/ServiceCard";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { branches, byBranch } from "@/data/services";
+import { bannerImage, serviceImage } from "@/lib/images";
 
 export const metadata: Metadata = { title: "Hizmetler", description: "Dijital çözümler ve IT çözümleri: web tasarım, e-ticaret, SEO, Google Ads, kurumsal IT, network, kamera ve teknik destek." };
 
 export default function Page() {
   return (
     <>
-      <PageHeader kicker="Hizmetler" title="Dijital ve teknik ihtiyaçlarınız, tek çatı altında" lead="İki ana kol: dijitalde büyümenizi sağlayan çözümler ve altyapınızı ayakta tutan IT hizmetleri." crumbs={[{ name: "Hizmetler" }]} />
+      <PageHeader kicker="Hizmetler" title="Dijital ve teknik ihtiyaçlarınız, tek çatı altında" lead="İki ana kol: dijitalde büyümenizi sağlayan çözümler ve altyapınızı ayakta tutan IT hizmetleri." crumbs={[{ name: "Hizmetler" }]} image={bannerImage("hizmetler")} />
       {(["dijital", "it"] as const).map((b) => (
         <section key={b} className="container-x py-14">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
@@ -19,7 +20,7 @@ export default function Page() {
             <Link href={`/hizmetler/${branches[b].slug}`} className="font-display font-semibold text-accent">Kol sayfasına git</Link>
           </Reveal>
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {byBranch(b).map((s, i) => <Reveal key={s.slug} delay={(i % 3) * 90}><ServiceCard s={s} /></Reveal>)}
+            {byBranch(b).map((s, i) => <Reveal key={s.slug} delay={(i % 3) * 90}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
           </div>
         </section>
       ))}

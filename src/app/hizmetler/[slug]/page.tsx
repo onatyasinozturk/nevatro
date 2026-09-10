@@ -10,6 +10,7 @@ import JsonLd from "@/components/JsonLd";
 import { branches, byBranch, getService, services, type Branch } from "@/data/services";
 import { site } from "@/data/site";
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { bannerImage, serviceImage } from "@/lib/images";
 
 type Params = Promise<{ slug: string }>;
 const branchBySlug = (slug: string) => (Object.keys(branches) as Branch[]).find((b) => branches[b].slug === slug);
@@ -36,10 +37,10 @@ export default async function Page({ params }: { params: Params }) {
     const br = branches[b];
     return (
       <>
-        <PageHeader kicker={br.title} title={br.claim} lead={br.desc} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title }]} />
+        <PageHeader kicker={br.title} title={br.claim} lead={br.desc} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title }]} image={bannerImage("hizmetler")} />
         <section className="container-x py-14">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {byBranch(b).map((s, i) => <Reveal key={s.slug} delay={(i % 3) * 90}><ServiceCard s={s} /></Reveal>)}
+            {byBranch(b).map((s, i) => <Reveal key={s.slug} delay={(i % 3) * 90}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
           </div>
         </section>
         <CtaBand />
@@ -58,7 +59,7 @@ export default async function Page({ params }: { params: Params }) {
       <JsonLd data={serviceJsonLd(s.title, s.short, url)} />
       {s.faq.length > 0 && <JsonLd data={faqJsonLd(s.faq)} />}
       <JsonLd data={breadcrumbJsonLd([{ name: "Ana Sayfa", url: site.url }, { name: br.title, url: `${site.url}/hizmetler/${br.slug}` }, { name: s.title, url }])} />
-      <PageHeader kicker={br.title} title={s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} />
+      <PageHeader kicker={br.title} title={s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} image={serviceImage(s.slug) ?? bannerImage("hizmetler")} />
 
       <section className="container-x py-14 grid lg:grid-cols-[1fr_340px] gap-10">
         <div>
