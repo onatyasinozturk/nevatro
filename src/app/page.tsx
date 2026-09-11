@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import ScrollRail from "@/components/ScrollRail";
 import HeroSlider from "@/components/HeroSlider";
 import TrustStrip from "@/components/TrustStrip";
 import ServiceCard from "@/components/ServiceCard";
@@ -48,21 +49,19 @@ export default function Home() {
 
   return (
     <>
+      <ScrollRail />
       <HeroSlider slides={slides} />
+      <div className="h-8 md:h-12 bg-bg" />
       <TrustStrip />
 
-      {/* DESTEK MERKEZİ — sorun odaklı */}
+      {/* HİZMETLER */}
       <section className="container-x py-16 md:py-20">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <div className="kicker">Destek Merkezi</div>
-            <h2 className="text-3xl md:text-4xl font-bold max-w-[22ch]">Sorununuz hangisi?</h2>
-            <p className="mt-3 text-body max-w-[52ch]">Hizmet listesi okumaya gerek yok. Yaşadığınız durumu seçin, nasıl çözdüğümüzü anlatalım.</p>
-          </div>
-          <Link href="/destek" className="font-display font-semibold text-accent shrink-0">Tümünü gör →</Link>
+          <div><div className="kicker">Hizmetler</div><h2 className="text-3xl md:text-4xl font-bold">{site.name} ne sağlıyor?</h2></div>
+          <Link href="/hizmetler" className="font-display font-semibold text-accent shrink-0">Tüm hizmetler →</Link>
         </Reveal>
         <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} image={destekImage(d.slug)} /></Reveal>)}
+          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 80}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
         </div>
       </section>
 
@@ -88,14 +87,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HİZMETLER */}
+      {/* DESTEK MERKEZİ — sorun odaklı */}
       <section className="container-x py-16 md:py-20">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
-          <div><div className="kicker">Hizmetler</div><h2 className="text-3xl md:text-4xl font-bold">Tam olarak ne yapıyoruz?</h2></div>
-          <Link href="/hizmetler" className="font-display font-semibold text-accent shrink-0">Tüm hizmetler →</Link>
+          <div>
+            <div className="kicker">Destek Merkezi</div>
+            <h2 className="text-3xl md:text-4xl font-bold max-w-[22ch]">Sorununuz hangisi?</h2>
+            <p className="mt-3 text-body max-w-[52ch]">Hizmet listesi okumaya gerek yok. Yaşadığınız durumu seçin, nasıl çözdüğümüzü anlatalım.</p>
+          </div>
+          <Link href="/destek" className="font-display font-semibold text-accent shrink-0">Tümünü gör →</Link>
         </Reveal>
-        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 80}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
+        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} image={destekImage(d.slug)} /></Reveal>)}
         </div>
       </section>
 
@@ -104,7 +107,7 @@ export default function Home() {
       {/* HAKKIMIZDA ŞERİDİ */}
       <section className="bg-surface border-y border-line">
         <div className="container-x py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal className="relative h-[280px] md:h-[380px] rounded-2xl overflow-hidden bg-primary">
+          <Reveal className="relative h-[280px] md:h-[380px] overflow-hidden bg-primary border border-line">
             {about
               ? <Image src={about} alt={`${site.name} ekibi`} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
               : <div className="absolute inset-0 grid place-items-center text-white/30 text-sm">img/hakkimizda.jpg</div>}
@@ -125,7 +128,7 @@ export default function Home() {
       {/* SÜREÇ */}
       <section className="container-x py-16 md:py-20">
         <Reveal><div className="kicker">Nasıl çalışıyoruz?</div><h2 className="text-3xl md:text-4xl font-bold">Keşiften bakıma dört adım</h2></Reveal>
-        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 card divide-y sm:divide-y-0 sm:divide-x divide-line">
+        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 card-hard divide-y sm:divide-y-0 sm:divide-x divide-line">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 110} className="p-7">
               <div className="font-display text-3xl font-extrabold text-accent">{s.n}</div>
@@ -139,14 +142,21 @@ export default function Home() {
       {/* SEKTÖRLER */}
       <section className="bg-surface border-y border-line">
         <div className="container-x py-16 md:py-20">
-          <Reveal className="flex flex-wrap items-end justify-between gap-4">
-            <div><div className="kicker">Sektörler</div><h2 className="text-3xl md:text-4xl font-bold max-w-[22ch]">Kime hizmet veriyoruz?</h2></div>
-            <Link href="/sektorler" className="font-display font-semibold text-accent shrink-0">Tümü →</Link>
+          <Reveal>
+            <div className="kicker">Sektörler</div>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+              <h2 className="text-3xl md:text-4xl font-bold">Kime hizmet veriyoruz?</h2>
+              <Link href="/sektorler" className="font-display font-semibold text-accent">Tümü →</Link>
+            </div>
           </Reveal>
-          <div className="mt-9 flex flex-wrap gap-3">
-            {sectors.map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 8) * 50}>
-                <Link href={`/sektorler/${s.slug}`} className="px-5 py-3 rounded-xl border border-line bg-bg hover:border-primary hover:text-primary transition-colors font-display font-semibold text-sm">{s.name}</Link>
+          <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-line">
+            {sectors.map((sc, i) => (
+              <Reveal key={sc.slug} delay={(i % 4) * 60}>
+                <Link href={`/sektorler/${sc.slug}`} className="group flex flex-col justify-between h-full p-6 border-r border-b border-line bg-surface hover:bg-bg transition-colors">
+                  <div className="font-display font-bold text-primary">{sc.name}</div>
+                  <p className="mt-2 text-sm text-body clamp-2 min-h-[2.7rem]">{sc.problem}</p>
+                  <span className="mt-4 text-sm font-display font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity">Çözümler →</span>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -159,14 +169,14 @@ export default function Home() {
         <div className="mt-9 grid md:grid-cols-3 gap-5">
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
-              <Link href="/projeler" className="card block overflow-hidden group hover:border-primary transition-colors">
-                <div className="relative h-44 bg-primary overflow-hidden">
+              <Link href="/projeler" className="card-hard group flex flex-col h-full overflow-hidden">
+                <div className="relative h-44 shrink-0 bg-primary overflow-hidden border-b border-line">
                   {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold">{p.title}</h3>
-                  <div className="mt-2 text-xs text-muted">{p.tags.join("  ·  ")}</div>
-                  <p className="mt-3 text-sm text-body">{p.summary}</p>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-lg font-bold clamp-1">{p.title}</h3>
+                  <div className="mt-2 text-xs text-muted clamp-1">{p.tags.join("  ·  ")}</div>
+                  <p className="mt-3 text-sm text-body clamp-2 min-h-[2.7rem]">{p.summary}</p>
                 </div>
               </Link>
             </Reveal>
@@ -194,8 +204,8 @@ export default function Home() {
           <p className="mt-4 text-body max-w-[52ch]">{site.serviceArea.slice(0, 4).join(", ")} ve çevresinde bilgisayar, network ve güvenlik sistemleri için yerinde servis. Dijital hizmetlerde Türkiye geneline online çalışıyoruz.</p>
         </Reveal>
         <Reveal delay={120} className="flex flex-wrap gap-2">
-          {area.map((d) => <Link key={d.slug} href={`/hizmet-bolgeleri/istanbul/${d.slug}`} className="px-4 py-2 rounded-lg bg-surface border border-line text-sm hover:border-primary hover:text-primary">{d.name}</Link>)}
-          <Link href="/hizmet-bolgeleri" className="px-4 py-2 rounded-lg text-sm text-accent font-semibold">Tüm ilçeler</Link>
+          {area.map((d) => <Link key={d.slug} href={`/hizmet-bolgeleri/istanbul/${d.slug}`} className="px-4 py-2 bg-surface border border-line text-sm hover:border-primary hover:text-primary">{d.name}</Link>)}
+          <Link href="/hizmet-bolgeleri" className="px-4 py-2 text-sm text-accent font-semibold">Tüm ilçeler</Link>
         </Reveal>
       </section>
 

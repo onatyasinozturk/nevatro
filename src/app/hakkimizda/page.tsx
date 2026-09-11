@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <>
       <PageHeader kicker="Hakkımızda" title="Dijital ve teknik tarafı aynı ekipten alın" lead="Çoğu işletme web sitesi için bir ajansla, kamera için bir teknik servisle, network için başka biriyle uğraşır. Biz bu ikisini aynı çatı altında topladık." crumbs={[{ name: "Hakkımızda" }]} image={bannerImage("hizmetler")} />
-      {photo && (<section className="container-x pt-14"><Reveal className="relative h-[320px] md:h-[440px] rounded-2xl overflow-hidden"><Image src={photo} alt={`${site.name} ekibi`} fill sizes="100vw" className="object-cover" /></Reveal></section>)}
+      {photo && (<section className="container-x pt-14"><Reveal className="relative h-[320px] md:h-[440px] rounded-[2px] overflow-hidden"><Image src={photo} alt={`${site.name} ekibi`} fill sizes="100vw" className="object-cover" /></Reveal></section>)}
       <section className="container-x py-14 grid lg:grid-cols-[1fr_1fr] gap-12">
         <Reveal className="prose-x">
           <h2>Kimiz?</h2>

@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: Params }) {
         <div className="mt-5 grid sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {p.districts.map((d, i) => (
             <Reveal key={d.slug} delay={(i % 4) * 40}>
-              <Link href={`/hizmet-bolgeleri/${p.slug}/${d.slug}`} className={`card block px-5 py-4 hover:border-primary transition-colors ${site.serviceArea.includes(d.name) ? "border-l-4 border-l-accent" : ""}`}>
+              <Link href={`/hizmet-bolgeleri/${p.slug}/${d.slug}`} className={`card-hard block px-5 py-4 ${site.serviceArea.includes(d.name) ? "border-l-4 border-l-accent" : ""}`}>
                 <div className="font-display font-semibold text-primary">{d.name}</div>
                 <div className="text-xs text-muted mt-1">{d.neighborhoods.length} mahalle</div>
               </Link>

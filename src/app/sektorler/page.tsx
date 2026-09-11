@@ -15,10 +15,10 @@ export default function Page() {
       <section className="container-x py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {sectors.map((s, i) => (
           <Reveal key={s.slug} delay={(i % 4) * 90}>
-            <Link href={`/sektorler/${s.slug}`} className="card p-6 block h-full hover:border-primary transition-colors">
-              <h2 className="text-lg font-bold">{s.name}</h2>
-              <p className="mt-2 text-sm text-body">{s.problem}</p>
-              <span className="inline-block mt-4 text-sm font-display font-semibold text-primary underline-grow">Çözümleri gör</span>
+            <Link href={`/sektorler/${s.slug}`} className="card-hard flex flex-col h-full p-6">
+              <h2 className="text-lg font-bold clamp-1">{s.name}</h2>
+              <p className="mt-2 text-sm text-body clamp-2 min-h-[2.7rem]">{s.problem}</p>
+              <span className="mt-auto pt-4 text-sm font-display font-semibold text-accent">Çözümleri gör →</span>
             </Link>
           </Reveal>
         ))}

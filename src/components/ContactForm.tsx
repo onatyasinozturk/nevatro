@@ -14,7 +14,7 @@ export default function ContactForm() {
     const text = `Merhaba, ${f.name}. ${f.service ? `${f.service} hakkında ` : ""}teklif almak istiyorum. ${f.msg}${f.phone ? ` Tel: ${f.phone}` : ""}`;
     window.open(`${site.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
   };
-  const inp = "w-full px-3.5 py-3 rounded-lg border border-line bg-white text-body focus:border-accent";
+  const inp = "w-full px-3.5 py-3 rounded-[2px] border border-line bg-white text-body focus:border-accent";
   return (
     <form onSubmit={submit} className="card p-7">
       <div className="grid sm:grid-cols-2 gap-4">

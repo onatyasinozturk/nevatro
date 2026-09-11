@@ -15,6 +15,8 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
     return () => clearInterval(t);
   }, [paused, slides.length]);
   const s = slides[i];
+  const prev = () => setI((x) => (x - 1 + slides.length) % slides.length);
+  const next = () => setI((x) => (x + 1) % slides.length);
 
   return (
     <section className="relative bg-primary text-white overflow-hidden" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
@@ -24,7 +26,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           <Image key={sl.image} src={sl.image} alt="" fill priority={n === 0} sizes="(max-width:1024px) 100vw, 52vw"
             className={`object-cover transition-opacity duration-700 ${n === i ? "opacity-100" : "opacity-0"}`} />
         ))}
-        <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/40 lg:to-transparent" />
+        <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/55 lg:to-transparent" />
       </div>
 
       <div className="container-x relative z-10 py-20 md:py-28 lg:py-32">
@@ -39,12 +41,26 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
         </div>
 
         {slides.length > 1 && (
-          <div className="mt-12 flex items-center gap-3">
-            {slides.map((_, n) => (
-              <button key={n} onClick={() => setI(n)} aria-label={`${n + 1}. slayt`}
-                className={`h-1 rounded-full transition-all ${n === i ? "w-10 bg-accent" : "w-5 bg-white/30 hover:bg-white/60"}`} />
-            ))}
-            <span className="ml-2 text-xs text-white/40 tabular-nums">{String(i + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span>
+          <div className="mt-12 flex items-center gap-5 flex-wrap">
+            <div className="flex">
+              <button onClick={prev} aria-label="Önceki slayt"
+                className="w-12 h-12 border border-white/25 hover:bg-white hover:text-primary text-white transition-colors grid place-items-center">
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button onClick={next} aria-label="Sonraki slayt"
+                className="w-12 h-12 border border-white/25 border-l-0 hover:bg-white hover:text-primary text-white transition-colors grid place-items-center">
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+            <div className="flex items-center gap-3">
+              {slides.map((sl, n) => (
+                <button key={n} onClick={() => setI(n)} aria-label={sl.kicker} title={sl.kicker}
+                  className={`text-xs font-display font-semibold tracking-wide pb-1 border-b-2 transition-colors ${n === i ? "text-white border-accent" : "text-white/40 border-transparent hover:text-white/80"}`}>
+                  {String(n + 1).padStart(2, "0")}
+                </button>
+              ))}
+            </div>
+            <span className="text-xs text-white/35">{s.kicker}</span>
           </div>
         )}
       </div>

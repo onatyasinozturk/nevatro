@@ -17,10 +17,10 @@ export default function Page() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {posts.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 3) * 90}>
-              <Link href={`/blog/${p.slug}`} className="card p-6 block h-full hover:border-primary transition-colors">
+              <Link href={`/blog/${p.slug}`} className="card-hard flex flex-col h-full p-6">
                 <div className="text-xs text-muted">{p.category ?? "Genel"} — {p.date}</div>
-                <h2 className="mt-2 text-lg font-bold">{p.title}</h2>
-                <p className="mt-2 text-sm text-body">{p.excerpt}</p>
+                <h2 className="mt-2 text-lg font-bold clamp-2 min-h-[3.2rem]">{p.title}</h2>
+                <p className="mt-2 text-sm text-body clamp-2 min-h-[2.7rem]">{p.excerpt}</p>
               </Link>
             </Reveal>
           ))}

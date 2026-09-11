@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: Params }) {
 
           <Reveal className="mt-12"><h2 className="text-2xl font-bold">{d.name} mahalleleri</h2><p className="mt-2 text-sm text-muted">Aşağıdaki mahallelerin tamamına yerinde servis veriyoruz.</p></Reveal>
           <Reveal className="mt-4 flex flex-wrap gap-2">
-            {d.neighborhoods.map((m) => <span key={m} className="px-3 py-1.5 rounded-md bg-surface border border-line text-xs">{m}</span>)}
+            {d.neighborhoods.map((m) => <span key={m} className="px-3 py-1.5 rounded-[2px] bg-surface border border-line text-xs">{m}</span>)}
           </Reveal>
 
           <Reveal className="mt-12"><h2 className="text-2xl font-bold">Sık sorulanlar</h2></Reveal>

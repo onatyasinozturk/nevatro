@@ -35,7 +35,7 @@ export default function Header() {
                     <div className="card p-3 w-[280px] shadow-xl shadow-primary/10">
                       <div className="px-3 py-2 text-xs font-semibold text-muted">{branches[n.menu].claim}</div>
                       {byBranch(n.menu).map((s) => (
-                        <Link key={s.slug} href={`/hizmetler/${s.slug}`} className="block px-3 py-2 rounded-lg text-sm text-body hover:bg-bg hover:text-primary">{s.title}</Link>
+                        <Link key={s.slug} href={`/hizmetler/${s.slug}`} className="block px-3 py-2 rounded-[2px] text-sm text-body hover:bg-bg hover:text-primary">{s.title}</Link>
                       ))}
                       <Link href={n.href} className="block px-3 py-2 mt-1 text-sm font-semibold text-accent">Tümünü gör</Link>
                     </div>
@@ -51,7 +51,7 @@ export default function Header() {
           <Link href="/iletisim" className="btn btn-accent">Teklif Al</Link>
         </div>
 
-        <button className="lg:hidden w-11 h-10 border border-line rounded-lg grid place-items-center" aria-label="Menü" aria-expanded={open} onClick={() => setOpen(!open)}>
+        <button className="lg:hidden w-11 h-10 border border-line rounded-[2px] grid place-items-center" aria-label="Menü" aria-expanded={open} onClick={() => setOpen(!open)}>
           <span className="relative block w-5 h-0.5 bg-primary before:absolute before:-top-1.5 before:left-0 before:w-5 before:h-0.5 before:bg-primary after:absolute after:top-1.5 after:left-0 after:w-5 after:h-0.5 after:bg-primary" />
         </button>
       </div>
