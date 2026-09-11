@@ -161,7 +161,7 @@ export default function Home() {
             <Reveal key={p.slug} delay={i * 100}>
               <Link href="/projeler" className="card block overflow-hidden group hover:border-primary transition-colors">
                 <div className="relative h-44 bg-primary overflow-hidden">
-                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-500" />}
+                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />}
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold">{p.title}</h3>

@@ -39,10 +39,14 @@
   --radius-card: var(--radius);
 }
 
-html { scroll-behavior: smooth; }
-body { background: var(--c-bg); color: var(--c-text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-h1,h2,h3,h4 { font-family: var(--font-display); color: var(--c-primary); letter-spacing: -0.02em; line-height: 1.1; }
-:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+/* @layer base ŞART: layer dışında kalırsa h1 rengi, text-white gibi Tailwind
+   sınıflarını ezer ve koyu zeminde başlık görünmez olur. */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { background: var(--c-bg); color: var(--c-text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--c-primary); letter-spacing: -0.02em; line-height: 1.1; }
+  :focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+}
 
 /* ---------- ortak bileşen sınıfları ---------- */
 .container-x { max-width: 1180px; margin-inline: auto; padding-inline: 24px; }
