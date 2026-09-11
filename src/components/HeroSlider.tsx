@@ -24,7 +24,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
           <Image key={sl.image} src={sl.image} alt="" fill priority={n === 0} sizes="(max-width:1024px) 100vw, 52vw"
             className={`object-cover transition-opacity duration-700 ${n === i ? "opacity-100" : "opacity-0"}`} />
         ))}
-        <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/55 lg:to-transparent" />
+        <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/40 lg:to-transparent" />
       </div>
 
       <div className="container-x relative z-10 py-20 md:py-28 lg:py-32">
