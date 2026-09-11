@@ -4,12 +4,13 @@ import { useState } from "react";
 import Logo from "./Logo";
 import { branches, byBranch } from "@/data/services";
 import { site } from "@/data/site";
+import TopBar from "./TopBar";
 
 const nav = [
   { href: `/hizmetler/${branches.dijital.slug}`, label: "Dijital", menu: "dijital" as const },
   { href: `/hizmetler/${branches.it.slug}`, label: "IT Çözümleri", menu: "it" as const },
+  { href: "/destek", label: "Destek Merkezi" },
   { href: "/sektorler", label: "Sektörler" },
-  { href: "/projeler", label: "Projeler" },
   { href: "/blog", label: "Blog" },
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/iletisim", label: "İletişim" },
@@ -19,7 +20,8 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [sub, setSub] = useState<string | null>(null);
   return (
-    <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur border-b border-line">
+    <header className="sticky top-0 z-50 bg-surface/95 backdrop-blur border-b border-line">
+      <div className="hidden md:block"><TopBar /></div>
       <div className="container-x h-[68px] flex items-center justify-between gap-4">
         <Link href="/" aria-label={`${site.name} ana sayfa`}><Logo /></Link>
 
@@ -44,7 +46,10 @@ export default function Header() {
           </ul>
         </nav>
 
-        <Link href="/iletisim" className="btn btn-accent hidden lg:inline-flex">Teklif Al</Link>
+        <div className="hidden lg:flex items-center gap-3">
+          <a href={site.phoneHref} className="font-display font-bold text-primary hover:text-accent">{site.phone}</a>
+          <Link href="/iletisim" className="btn btn-accent">Teklif Al</Link>
+        </div>
 
         <button className="lg:hidden w-11 h-10 border border-line rounded-lg grid place-items-center" aria-label="Menü" aria-expanded={open} onClick={() => setOpen(!open)}>
           <span className="relative block w-5 h-0.5 bg-primary before:absolute before:-top-1.5 before:left-0 before:w-5 before:h-0.5 before:bg-primary after:absolute after:top-1.5 after:left-0 after:w-5 after:h-0.5 after:bg-primary" />
@@ -69,7 +74,8 @@ export default function Header() {
                 )}
               </div>
             ))}
-            <Link href="/iletisim" className="btn btn-accent w-full mt-4" onClick={() => setOpen(false)}>Teklif Al</Link>
+            <a href={site.phoneHref} className="btn btn-outline w-full mt-4">{site.phone}</a>
+            <Link href="/iletisim" className="btn btn-accent w-full mt-2" onClick={() => setOpen(false)}>Teklif Al</Link>
           </div>
         </nav>
       )}

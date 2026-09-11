@@ -17,7 +17,7 @@ export default function Page() {
       <section className="container-x py-14 grid lg:grid-cols-[1fr_1fr] gap-12">
         <Reveal className="prose-x">
           <h2>Kimiz?</h2>
-          <p>{site.name}, İstanbul&apos;da kurulmuş bir teknoloji ve teknik hizmet firmasıdır. Kurucu ekibin arkasında e-ticaret ve pazaryeri operasyonunda yıllara dayanan saha tecrübesi, teknik tarafta ise network, bilgisayar sistemleri ve güvenlik kurulumlarında birikim var.</p>
+          <p>{site.name}, {site.district}/{site.city} merkezli bir teknoloji ve teknik hizmet firmasıdır. {site.experienceYears} yılı aşkın saha tecrübemiz var. Kurucu ekibin arkasında e-ticaret ve pazaryeri operasyonunda yıllara dayanan saha tecrübesi, teknik tarafta ise network, bilgisayar sistemleri ve güvenlik kurulumlarında birikim var.</p>
           <h2>Neye inanıyoruz?</h2>
           <p>Bir işletmenin dijital görünürlüğü ile teknik altyapısı birbirinden ayrı düşünülemez. Web siteniz güzel ama ofisteki internet sürekli kesiliyorsa, ya da kameralarınız var ama Google&apos;da sizi kimse bulamıyorsa iş yarım kalır. Biz iki tarafı da bilen tek muhatap olmayı hedefliyoruz.</p>
           <h2>Nasıl çalışıyoruz?</h2>

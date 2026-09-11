@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import { site } from "@/data/site";
 import { branches, byBranch } from "@/data/services";
 import { provinces } from "@/lib/locations";
+import { destek } from "@/data/destek";
 
 export default function Footer() {
   const ist = provinces.find((p) => p.slug === "istanbul");
@@ -11,12 +12,15 @@ export default function Footer() {
     .filter(Boolean) as { name: string; slug: string }[];
   return (
     <footer className="bg-primary text-white/70 text-sm">
-      <div className="container-x py-14 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+      <div className="container-x py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr]">
         <div>
           <Logo light />
           <p className="mt-4 max-w-[34ch] leading-relaxed">{site.description}</p>
-          <div className="mt-5 text-xs leading-7">
-            {site.legalName}<br />{site.address}<br />
+          <div className="mt-5 text-xs leading-6">
+            {site.hours.map((h) => <div key={h.d} className="flex justify-between max-w-[15rem]"><span>{h.d}</span><span className="text-white">{h.h}</span></div>)}
+          </div>
+          <div className="mt-4 text-xs leading-7">
+            {site.legalName}<br />{site.addressFull}<br />
             <a href={site.phoneHref} className="text-white">{site.phone}</a> — <a href={`mailto:${site.email}`} className="text-white">{site.email}</a>
           </div>
         </div>
@@ -27,6 +31,11 @@ export default function Footer() {
         <div>
           <h4 className="text-white text-xs font-bold mb-3">{branches.it.title}</h4>
           {byBranch("it").map((s) => <Link key={s.slug} href={`/hizmetler/${s.slug}`} className="block py-1 hover:text-white">{s.title}</Link>)}
+        </div>
+        <div>
+          <h4 className="text-white text-xs font-bold mb-3">Destek Merkezi</h4>
+          {destek.slice(0, 5).map((d) => <Link key={d.slug} href={`/destek/${d.slug}`} className="block py-1 hover:text-white">{d.title}</Link>)}
+          <Link href="/destek" className="block py-1 text-accent">Tüm konular</Link>
         </div>
         <div>
           <h4 className="text-white text-xs font-bold mb-3">Hizmet Bölgeleri</h4>

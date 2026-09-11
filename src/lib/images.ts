@@ -20,3 +20,6 @@ export function sahaImages(): string[] {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir).filter((f) => /\.(jpe?g|webp|png)$/i.test(f)).sort().map((f) => `/img/saha/${f}`);
 }
+
+export const destekImage = (slug: string) => img(`destek/${slug}`);
+export const heroSlideImage = (n: number) => img(`hero-${n}`) ?? img("hero");

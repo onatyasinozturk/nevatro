@@ -7,9 +7,13 @@ export const localBusinessJsonLd = () => ({
   url: site.url,
   telephone: site.phone,
   email: site.email,
-  address: { "@type": "PostalAddress", addressLocality: site.city, addressCountry: "TR", streetAddress: site.address },
+  address: { "@type": "PostalAddress", addressLocality: site.district, addressRegion: site.city, addressCountry: "TR", streetAddress: site.addressFull },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday"], opens: "10:00", closes: "15:00" },
+  ],
   areaServed: site.serviceArea.map((a) => ({ "@type": "City", name: `${a}, ${site.city}` })),
-  sameAs: Object.values(site.social),
+  sameAs: Object.values(site.social).filter(Boolean),
 });
 
 export const serviceJsonLd = (name: string, description: string, url: string) => ({

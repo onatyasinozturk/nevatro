@@ -1,16 +1,38 @@
-FOTOĞRAF KLASÖRÜ — dosyayı doğru isimle buraya at, site otomatik kullanır. Yoksa vektör/renk fallback çalışır.
+FOTOĞRAF KLASÖRÜ
+================
+Dosyayı doğru isimle buraya at, site otomatik kullanır. Dosya yoksa site bozulmaz,
+o alan renkli panel olarak görünür.
 
-img/hero.jpg                 Anasayfa hero arka planı (yatay, en az 1600px genişlik)
-img/hakkimizda.jpg           Hakkımızda sayfası ekip / ofis fotoğrafı
-img/banners/hizmetler.jpg    Hizmetler, Dijital, IT sayfalarının üst banner'ı
-img/banners/sektorler.jpg    Sektörler sayfaları banner'ı
-img/banners/bolgeler.jpg     Hizmet bölgeleri sayfaları banner'ı
-img/banners/iletisim.jpg     İletişim sayfası banner'ı
-img/banners/blog.jpg         Blog banner'ı
-img/services/<slug>.jpg      Hizmet kartı + hizmet sayfası banner'ı. Slug'lar:
-                             web-tasarim, e-ticaret, pazaryeri-danismanligi, seo, google-ads, sosyal-medya,
-                             kurumsal-it, network-altyapi, bilgisayar-sistemleri, kamera-alarm, teknik-destek
-img/projects/<slug>.jpg      Proje kartı görseli (src/data/projects.ts içindeki slug)
-img/saha/*.jpg               Sahadan fotoğraflar; kaç tane koyarsan anasayfada o kadar gösterir (dosya adı serbest)
+ÖNCELİK SIRASI (ilk 3'ü yeter, site bambaşka görünür)
 
-Format: .jpg veya .webp. Büyük dosyaları squoosh.app ile 200-400 KB'a düşür.
+1) HERO — anasayfa üstü, 3 slayt
+   img/hero-1.jpg    ofis/network kurulumu
+   img/hero-2.jpg    bilgisayar teknik servis
+   img/hero-3.jpg    kamera / güvenlik
+   (Sadece img/hero.jpg koyarsan üçünde de o kullanılır.)
+   Yatay, en az 1600x1000. Sağ tarafta durur, üstüne lacivert perde biner.
+
+2) SAHA — anasayfadaki galeri
+   img/saha/ klasörüne kaç foto atarsan o kadar gösterir (dosya adı serbest).
+   4-8 tane ideal. EN DEĞERLİSİ BUNLAR: kendi işinizden telefonla çekilmiş kareler.
+
+3) DESTEK MERKEZİ kartları
+   img/destek/bilgisayar-yavasladi.jpg
+   img/destek/internet-kopuyor.jpg
+   img/destek/veri-kaybi.jpg
+   img/destek/yedekleme-yok.jpg
+   img/destek/kamera-goruntu-yok.jpg
+   img/destek/virus-fidye.jpg
+   img/destek/yeni-ofis-kurulumu.jpg
+   img/destek/google-da-bulunamiyoruz.jpg
+
+4) HİZMET kartları — img/services/<slug>.jpg
+   web-tasarim, e-ticaret, pazaryeri-danismanligi, seo, google-ads, sosyal-medya,
+   kurumsal-it, network-altyapi, bilgisayar-sistemleri, kamera-alarm, teknik-destek
+
+5) İÇ SAYFA BANNER'LARI — img/banners/<ad>.jpg
+   hizmetler, sektorler, bolgeler, iletisim, blog, destek
+
+6) img/hakkimizda.jpg   ekip / ofis fotoğrafı
+
+FORMAT: .jpg veya .webp · Yükledikten sonra squoosh.app ile 200-400 KB'a düşür.

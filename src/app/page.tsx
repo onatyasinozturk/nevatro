@@ -1,127 +1,167 @@
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import HeroVisual from "@/components/HeroVisual";
+import HeroSlider from "@/components/HeroSlider";
+import TrustStrip from "@/components/TrustStrip";
 import ServiceCard from "@/components/ServiceCard";
-import ProblemFinder from "@/components/ProblemFinder";
+import DestekCard from "@/components/DestekCard";
+import SahaGallery from "@/components/SahaGallery";
+import Faq from "@/components/Faq";
 import CtaBand from "@/components/CtaBand";
 import { site } from "@/data/site";
 import { branches, byBranch, services } from "@/data/services";
-import { projects } from "@/data/projects";
+import { destek } from "@/data/destek";
+import { sectors } from "@/data/sectors";
 import { provinces, locative } from "@/lib/locations";
-import Image from "next/image";
-import SahaGallery from "@/components/SahaGallery";
-import { heroImage, serviceImage, projectImage, sahaImages } from "@/lib/images";
+import { heroSlideImage, serviceImage, destekImage, projectImage, sahaImages, img } from "@/lib/images";
+import { projects } from "@/data/projects";
 
-const why = [
-  { t: "Tek noktadan yönetim", d: "Dijital ve teknik süreçlerinizi farklı firmalara bölmek zorunda kalmazsınız." },
-  { t: "İşletme odaklı çözümler", d: "Sadece sistem kurmuyoruz; operasyonunuza uygun yapı kuruyoruz." },
-  { t: "Ölçeklenebilir altyapı", d: "Bugünün ihtiyacına değil, büyüdüğünüzde de kullanılabilecek yapılara odaklanıyoruz." },
-  { t: "Sürekli destek", d: "Kurulum sonrası teknik destek ve geliştirme süreçleri." },
-];
 const steps = [
-  { n: "01", t: "İhtiyaç Analizi", d: "Yerinde ya da online keşif. Mevcut durumu ve hedefi netleştiriyoruz." },
-  { n: "02", t: "Planlama", d: "Kalem kalem teklif, zaman planı ve alternatifler." },
-  { n: "03", t: "Kurulum / Uygulama", d: "Planlı günde, işinizi aksatmadan. Teslim tutanaklı." },
-  { n: "04", t: "Destek & Geliştirme", d: "Bakım, izleme ve büyüdükçe geliştirme." },
+  { n: "01", t: "İhtiyaç Analizi", d: "Yerinde ya da telefonda keşif. Mevcut durumu ve hedefi netleştiriyoruz." },
+  { n: "02", t: "Planlama", d: "Kalem kalem teklif, zaman planı ve alternatifler. Sürpriz kalem yok." },
+  { n: "03", t: "Kurulum", d: "Planlı günde, işinizi aksatmadan. Etiketli, belgeli, teslim tutanaklı." },
+  { n: "04", t: "Destek", d: "Kurulum bitince biten bir iş değil. Bakım, izleme ve geliştirme." },
+];
+
+const faq = [
+  { q: "Keşif ücretli mi?", a: `Hayır. ${site.city} içinde yerinde keşif ve teklif ücretsiz, teklifi kabul etme zorunluluğu yok.` },
+  { q: "Ne kadar sürede geliyorsunuz?", a: `${site.serviceArea.slice(0, 3).join(", ")} ve çevresinde çoğu talebe aynı gün dönüyoruz. Diğer ilçelerde genellikle 1-2 iş günü içinde keşif planlıyoruz.` },
+  { q: "Uzaktan da destek veriyor musunuz?", a: "Evet. Yazılım kaynaklı sorunların büyük kısmını uzaktan bağlanarak, siz beklemeden çözüyoruz. Donanım arızalarında yerinde müdahale gerekir." },
+  { q: "Faturalı ve sözleşmeli çalışıyor musunuz?", a: "Evet. Tüm işlerimiz faturalı; kurumsal müşterilerimizle bakım sözleşmesiyle ilerliyoruz." },
+  { q: "Bakım sözleşmesi zorunlu mu?", a: "Hayır, tek seferlik iş de yapıyoruz. Ancak düzenli kontrol arızayı büyümeden yakaladığı için uzun vadede daha ucuza geliyor." },
+  { q: "Hem web sitesi hem teknik servis aynı firmadan olur mu?", a: "Bizde oluyor, zaten kuruluş sebebimiz bu. Ofisin internetini kuran ekiple sitenizi yapan ekip aynı; iki tarafı da bilen tek muhatap." },
 ];
 
 export default function Home() {
   const ist = provinces.find((p) => p.slug === "istanbul");
   const area = site.serviceArea.map((n) => ist?.districts.find((d) => d.name === n)).filter(Boolean) as { name: string; slug: string }[];
-  const hero = heroImage();
   const saha = sahaImages();
-  const grid = ["web-tasarim", "e-ticaret", "google-ads", "seo", "kurumsal-it", "network-altyapi", "kamera-alarm", "teknik-destek"]
+  const about = img("hakkimizda");
+  const grid = ["kamera-alarm", "network-altyapi", "kurumsal-it", "bilgisayar-sistemleri", "web-tasarim", "e-ticaret", "google-ads", "pazaryeri-danismanligi"]
     .map((s) => services.find((x) => x.slug === s)!);
+
+  const slides = [
+    { kicker: "Kurumsal IT & Network", title: "Ofisiniz dursun diye değil, hiç durmasın diye kuruyoruz.", text: "Yapısal kablolama, kurumsal Wi-Fi ve IT desteği. Kurulumdan aylık bakıma tek muhatap.", href: `/hizmetler/${branches.it.slug}`, cta: "IT Çözümleri", image: heroSlideImage(1) },
+    { kicker: "Teknik Servis", title: "Bilgisayar arızasında bekleyen iş, kaybedilen paradır.", text: `${site.district} ve çevresinde yerinde teknik servis, uzaktan destek ve periyodik bakım.`, href: "/destek", cta: "Destek Merkezi", image: heroSlideImage(2) },
+    { kicker: "Dijital & E-Ticaret", title: "Müşteri sizi arıyor. Bulabiliyor mu?", text: "Web sitesi, e-ticaret, Google Ads ve pazaryeri danışmanlığı — sahadan gelen gerçek operasyon tecrübesiyle.", href: `/hizmetler/${branches.dijital.slug}`, cta: "Dijital Çözümler", image: heroSlideImage(3) },
+  ];
 
   return (
     <>
-      {/* HERO */}
-      <section className={`relative border-b border-line overflow-hidden ${hero ? "bg-primary text-white" : "bg-surface"}`}>
-        {hero && (<><Image src={hero} alt="" fill priority sizes="100vw" className="object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/30" /></>)}
-        <div className="container-x relative grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center py-16 md:py-28">
+      <HeroSlider slides={slides} />
+      <TrustStrip />
+
+      {/* DESTEK MERKEZİ — sorun odaklı */}
+      <section className="container-x py-16 md:py-20">
+        <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className={`text-[2.5rem] md:text-[3.4rem] font-extrabold leading-[1.05] ${hero ? "text-white" : ""}`}>
-              <span className="hero-line"><span style={{ "--d": "0ms" } as React.CSSProperties}>Dijitalde büyüyün.</span></span>
-              <span className="hero-line"><span style={{ "--d": "140ms" } as React.CSSProperties}>Teknolojinizi güçlendirin.</span></span>
-            </h1>
-            <p className={`fade-in mt-6 text-lg max-w-[52ch] ${hero ? "text-white/80" : "text-body"}`} style={{ "--d": "420ms" } as React.CSSProperties}>{site.description}</p>
-            <div className="fade-in mt-8 flex flex-wrap gap-3" style={{ "--d": "560ms" } as React.CSSProperties}>
-              <Link href={`/hizmetler/${branches.dijital.slug}`} className="btn btn-accent">Dijital Çözümler</Link>
-              <Link href={`/hizmetler/${branches.it.slug}`} className={`btn ${hero ? "btn-light" : "btn-outline"}`}>IT Çözümleri</Link>
-            </div>
-            <div className={`fade-in mt-10 pt-6 border-t flex flex-wrap gap-x-6 gap-y-2 text-sm ${hero ? "border-white/20 text-white/60" : "border-line text-muted"}`} style={{ "--d": "760ms" } as React.CSSProperties}>
-              {["Web & E-Ticaret", "Google Ads", "IT Destek", "Network", "Kamera Sistemleri"].map((t) => <span key={t}>{t}</span>)}
-            </div>
+            <div className="kicker">Destek Merkezi</div>
+            <h2 className="text-3xl md:text-4xl font-bold max-w-[22ch]">Sorununuz hangisi?</h2>
+            <p className="mt-3 text-body max-w-[52ch]">Hizmet listesi okumaya gerek yok. Yaşadığınız durumu seçin, nasıl çözdüğümüzü anlatalım.</p>
           </div>
-          {!hero && <div className="fade-in" style={{ "--d": "200ms" } as React.CSSProperties}><HeroVisual /></div>}
+          <Link href="/destek" className="font-display font-semibold text-accent shrink-0">Tümünü gör →</Link>
+        </Reveal>
+        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} image={destekImage(d.slug)} /></Reveal>)}
         </div>
       </section>
 
       {/* İKİ KOL */}
-      <section className="container-x py-16 md:py-20">
-        <div className="grid md:grid-cols-2 gap-5">
-          {(["dijital", "it"] as const).map((b, i) => (
-            <Reveal key={b} delay={i * 120}>
-              <Link href={`/hizmetler/${branches[b].slug}`} className={`card block p-8 md:p-10 h-full border-t-4 transition-colors hover:border-primary ${b === "it" ? "border-t-it" : "border-t-accent"}`}>
-                <div className={`text-sm font-semibold ${b === "it" ? "text-it" : "text-accent"}`}>{b === "it" ? "IT Solutions" : "Digital"}</div>
-                <h2 className="mt-3 text-3xl font-bold">{branches[b].claim}</h2>
-                <p className="mt-3 text-body max-w-[46ch]">{branches[b].desc}</p>
-                <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                  {byBranch(b).map((s) => <li key={s.slug} className="flex items-center gap-2"><span className={`w-1.5 h-1.5 rounded-full ${b === "it" ? "bg-it" : "bg-accent"}`} />{s.title}</li>)}
-                </ul>
-                <span className="inline-block mt-7 font-display font-semibold text-primary underline-grow">{branches[b].title}</span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* NEDEN NEVATRO */}
       <section className="bg-surface border-y border-line">
         <div className="container-x py-16 md:py-20">
-          <Reveal><div className="kicker">Neden {site.name}?</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Boş vaat değil, dört net avantaj</h2></Reveal>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {why.map((w, i) => (
-              <Reveal key={w.t} delay={i * 100} className="border-l-2 border-accent pl-5">
-                <h3 className="text-lg font-bold">{w.t}</h3>
-                <p className="mt-2 text-sm text-body leading-relaxed">{w.d}</p>
+          <Reveal><div className="kicker">İki ana kol</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Teknik tarafı da dijital tarafı da aynı ekipten alın</h2></Reveal>
+          <div className="mt-9 grid md:grid-cols-2 gap-5">
+            {(["it", "dijital"] as const).map((b, i) => (
+              <Reveal key={b} delay={i * 120}>
+                <Link href={`/hizmetler/${branches[b].slug}`} className={`card block p-8 md:p-10 h-full border-t-4 transition-colors hover:border-primary ${b === "it" ? "border-t-it" : "border-t-accent"}`}>
+                  <div className={`text-sm font-semibold ${b === "it" ? "text-it" : "text-accent"}`}>{branches[b].title}</div>
+                  <h3 className="mt-3 text-2xl md:text-3xl font-bold">{branches[b].claim}</h3>
+                  <p className="mt-3 text-body max-w-[46ch]">{branches[b].desc}</p>
+                  <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                    {byBranch(b).map((s) => <li key={s.slug} className="flex items-center gap-2"><span className={`w-1.5 h-1.5 rounded-full ${b === "it" ? "bg-it" : "bg-accent"}`} />{s.title}</li>)}
+                  </ul>
+                  <span className="inline-block mt-7 font-display font-semibold text-primary underline-grow">Detaylı bilgi</span>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <SahaGallery images={saha} />
-
-      {/* HİZMETLER GRID */}
+      {/* HİZMETLER */}
       <section className="container-x py-16 md:py-20">
-        <Reveal><div className="kicker">Hizmetler</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Tam olarak ne yapıyoruz?</h2></Reveal>
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 90}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
+        <Reveal className="flex flex-wrap items-end justify-between gap-4">
+          <div><div className="kicker">Hizmetler</div><h2 className="text-3xl md:text-4xl font-bold">Tam olarak ne yapıyoruz?</h2></div>
+          <Link href="/hizmetler" className="font-display font-semibold text-accent shrink-0">Tüm hizmetler →</Link>
+        </Reveal>
+        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 80}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
         </div>
-        <Reveal className="mt-6 text-sm"><Link href="/hizmetler" className="font-display font-semibold text-accent">Tüm hizmetler</Link></Reveal>
       </section>
 
-      {/* SORUN BULUCU */}
+      <SahaGallery images={saha} />
+
+      {/* HAKKIMIZDA ŞERİDİ */}
+      <section className="bg-surface border-y border-line">
+        <div className="container-x py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal className="relative h-[280px] md:h-[380px] rounded-2xl overflow-hidden bg-primary">
+            {about
+              ? <Image src={about} alt={`${site.name} ekibi`} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+              : <div className="absolute inset-0 grid place-items-center text-white/30 text-sm">img/hakkimizda.jpg</div>}
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="kicker">Hakkımızda</div>
+            <h2 className="text-3xl md:text-4xl font-bold max-w-[20ch]">{site.experienceYears} yılı aşkın saha tecrübesi</h2>
+            <p className="mt-5 text-body max-w-[52ch]">Çoğu işletme web sitesi için bir ajansla, kamera için bir teknik servisle, network için başka biriyle uğraşır. Üç firmanın birbirini suçladığı yerde iş durur. {site.name} bu ikisini aynı çatı altında topladı.</p>
+            <p className="mt-4 text-body max-w-[52ch]">{site.district} merkezli çalışıyor, {site.city} genelinde yerinde servis veriyoruz. Dijital tarafta ise konumdan bağımsız, online.</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href="/hakkimizda" className="btn btn-outline">Bizi tanıyın</Link>
+              <a href={site.phoneHref} className="btn btn-accent">{site.phone}</a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* SÜREÇ */}
+      <section className="container-x py-16 md:py-20">
+        <Reveal><div className="kicker">Nasıl çalışıyoruz?</div><h2 className="text-3xl md:text-4xl font-bold">Keşiften bakıma dört adım</h2></Reveal>
+        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 card divide-y sm:divide-y-0 sm:divide-x divide-line">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 110} className="p-7">
+              <div className="font-display text-3xl font-extrabold text-accent">{s.n}</div>
+              <h3 className="mt-3 text-lg font-bold">{s.t}</h3>
+              <p className="mt-2 text-sm text-body">{s.d}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* SEKTÖRLER */}
       <section className="bg-surface border-y border-line">
         <div className="container-x py-16 md:py-20">
-          <Reveal><div className="kicker">Nereden başlamalı?</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Sorununuzu seçin, doğru başlangıcı gösterelim</h2></Reveal>
-          <Reveal className="mt-10" delay={120}><ProblemFinder /></Reveal>
+          <Reveal className="flex flex-wrap items-end justify-between gap-4">
+            <div><div className="kicker">Sektörler</div><h2 className="text-3xl md:text-4xl font-bold max-w-[22ch]">Kime hizmet veriyoruz?</h2></div>
+            <Link href="/sektorler" className="font-display font-semibold text-accent shrink-0">Tümü →</Link>
+          </Reveal>
+          <div className="mt-9 flex flex-wrap gap-3">
+            {sectors.map((s, i) => (
+              <Reveal key={s.slug} delay={(i % 8) * 50}>
+                <Link href={`/sektorler/${s.slug}`} className="px-5 py-3 rounded-xl border border-line bg-bg hover:border-primary hover:text-primary transition-colors font-display font-semibold text-sm">{s.name}</Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* PROJELER */}
       <section className="container-x py-16 md:py-20">
-        <Reveal><div className="kicker">{projects.every((p) => !p.real) ? "Örnek Çalışmalar" : "Projeler"}</div><h2 className="text-3xl md:text-4xl font-bold max-w-[24ch]">Nasıl bir iş çıkardığımızı görün</h2></Reveal>
-        <div className="mt-10 grid md:grid-cols-3 gap-5">
+        <Reveal><div className="kicker">{projects.every((p) => !p.real) ? "Örnek Çalışmalar" : "Projeler"}</div><h2 className="text-3xl md:text-4xl font-bold">Nasıl bir iş çıkardığımızı görün</h2></Reveal>
+        <div className="mt-9 grid md:grid-cols-3 gap-5">
           {projects.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 110}>
+            <Reveal key={p.slug} delay={i * 100}>
               <Link href="/projeler" className="card block overflow-hidden group hover:border-primary transition-colors">
-                <div className={`h-44 ${p.branch === "it" ? "bg-primary" : "bg-accent-soft"} relative overflow-hidden`}>
-                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover" />}
-                  <div className={`absolute inset-6 rounded-lg border ${p.branch === "it" ? "border-white/20" : "border-accent/30"}`} />
-                  <div className={`absolute left-8 top-8 h-2 w-16 rounded ${p.branch === "it" ? "bg-it" : "bg-accent"}`} />
-                  <div className={`absolute left-8 top-14 h-2 w-28 rounded ${p.branch === "it" ? "bg-white/30" : "bg-accent/30"}`} />
+                <div className="relative h-44 bg-primary overflow-hidden">
+                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-500" />}
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold">{p.title}</h3>
@@ -134,28 +174,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NASIL ÇALIŞIYORUZ */}
+      {/* SSS */}
       <section className="bg-surface border-y border-line">
-        <div className="container-x py-16 md:py-20">
-          <Reveal><div className="kicker">Nasıl çalışıyoruz?</div><h2 className="text-3xl md:text-4xl font-bold">Dört adım</h2></Reveal>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-0 card divide-y sm:divide-y-0 sm:divide-x divide-line">
-            {steps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 120} className="p-7">
-                <div className="font-display text-3xl font-extrabold text-accent">{s.n}</div>
-                <h3 className="mt-3 text-lg font-bold">{s.t}</h3>
-                <p className="mt-2 text-sm text-body">{s.d}</p>
-              </Reveal>
-            ))}
-          </div>
+        <div className="container-x py-16 md:py-20 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
+          <Reveal>
+            <div className="kicker">Sık sorulanlar</div>
+            <h2 className="text-3xl md:text-4xl font-bold max-w-[16ch]">Aklınızdaki soru burada yoksa arayın</h2>
+            <a href={site.phoneHref} className="btn btn-accent mt-6">{site.phone}</a>
+          </Reveal>
+          <Reveal delay={120}><Faq items={faq} /></Reveal>
         </div>
       </section>
 
-      {/* BÖLGESEL */}
-      <section className="container-x py-16 md:py-20 grid md:grid-cols-[1fr_1fr] gap-10 items-start">
+      {/* BÖLGE */}
+      <section className="container-x py-16 md:py-20 grid md:grid-cols-2 gap-10 items-start">
         <Reveal>
           <div className="kicker">Hizmet bölgesi</div>
           <h2 className="text-3xl md:text-4xl font-bold max-w-[18ch]">{locative(site.city)} yerinde teknik destek</h2>
-          <p className="mt-4 text-body max-w-[52ch]">{site.serviceArea.slice(0, 3).join(", ")} ve çevresinde bilgisayar, network ve güvenlik sistemleri için yerinde destek sağlıyoruz. Dijital hizmetlerde Türkiye geneline online çalışıyoruz.</p>
+          <p className="mt-4 text-body max-w-[52ch]">{site.serviceArea.slice(0, 4).join(", ")} ve çevresinde bilgisayar, network ve güvenlik sistemleri için yerinde servis. Dijital hizmetlerde Türkiye geneline online çalışıyoruz.</p>
         </Reveal>
         <Reveal delay={120} className="flex flex-wrap gap-2">
           {area.map((d) => <Link key={d.slug} href={`/hizmet-bolgeleri/istanbul/${d.slug}`} className="px-4 py-2 rounded-lg bg-surface border border-line text-sm hover:border-primary hover:text-primary">{d.name}</Link>)}
