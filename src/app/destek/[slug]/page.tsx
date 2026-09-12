@@ -61,7 +61,9 @@ export default async function Page({ params }: { params: Params }) {
         </div>
 
         <aside className="lg:sticky lg:top-24 self-start">
-          <div className="card p-6 bg-primary text-white border-primary">
+          {/* Sol sütundaki başlık kadar boşluk — kutu, yandaki liste kutusuyla aynı hizada başlasın */}
+          <div className="hidden lg:block text-2xl font-bold leading-[1.1] invisible" aria-hidden>&nbsp;</div>
+          <div className="card p-6 bg-primary text-white border-primary lg:mt-5">
             <div className="font-display font-bold text-lg text-white">Hemen çözelim</div>
             <p className="mt-2 text-sm text-white/70">{site.hoursShort}</p>
             <a href={site.phoneHref} className="btn btn-accent w-full mt-5">{site.phone}</a>
