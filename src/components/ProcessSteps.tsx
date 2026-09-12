@@ -25,7 +25,15 @@ export default function ProcessSteps() {
 
         {/* MASAÜSTÜ */}
         <div className="hidden md:block">
-          <div className="flex items-start gap-4 lg:gap-6 min-h-[210px] lg:min-h-[230px]" onMouseLeave={() => setActive(0)}>
+          {/*
+            Zıplama olmaması için:
+            - Yazı bloğu MUTLAK konumlu ve SABİT genişlikte: panel genişlerken
+              yazı yeniden kırılmaz, sadece panel kenarı onu açar/örter.
+            - Panel overflow-hidden: dar haldeyken yazı taşmaz, kırpılır.
+            - Satır yüksekliği sabit (min-h). Hiçbir şey akışı etkilemiyor.
+            - İçerik hep DOM'da; sadece opacity değişiyor, mount/unmount yok.
+          */}
+          <div className="flex items-start gap-4 lg:gap-6 h-[250px] lg:h-[270px]" onMouseLeave={() => setActive(0)}>
             {steps.map((s, i) => {
               const on = i === active;
               return (
@@ -34,19 +42,19 @@ export default function ProcessSteps() {
                   role="button" tabIndex={0} aria-expanded={on}
                   onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(i); } }}
-                  className={`group relative cursor-pointer basis-0 min-w-0 border-t-2 pt-7 transition-[flex-grow,border-color] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "border-accent grow-[5]" : "border-line hover:border-muted grow"}`}
+                  className={`relative overflow-hidden h-full cursor-pointer basis-0 min-w-0 border-t-2 pt-7 transition-[flex-grow,border-color] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] will-change-[flex-grow] ${on ? "border-accent grow-[5]" : "border-line hover:border-muted grow"}`}
                 >
-                  <div className="flex items-start gap-6 lg:gap-8">
-                    <span className={`font-display font-extrabold leading-none tracking-[-.04em] text-[5.5rem] lg:text-[7.5rem] tabular-nums shrink-0 select-none transition-colors duration-400 ${on ? "text-accent" : "text-line group-hover:text-muted"}`}>
-                      {i + 1}
-                    </span>
-                    {on && (
-                      <div className="step-in min-w-0 pt-2 lg:pt-3">
-                        <div className="text-xs font-semibold text-muted tracking-wide">Adım {String(i + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}</div>
-                        <h3 className="mt-1.5 text-xl lg:text-2xl font-bold whitespace-nowrap">{s.t}</h3>
-                        <p className="mt-3 text-sm lg:text-[.95rem] text-body leading-relaxed max-w-[38ch]">{s.d}</p>
-                      </div>
-                    )}
+                  <span className={`block w-[5.2rem] lg:w-[7rem] font-display font-extrabold leading-none tracking-[-.04em] text-[5.5rem] lg:text-[7.5rem] tabular-nums select-none transition-colors duration-400 ${on ? "text-accent" : "text-line hover:text-muted"}`}>
+                    {i + 1}
+                  </span>
+
+                  <div
+                    aria-hidden={!on}
+                    className={`absolute top-7 left-[6.6rem] lg:left-[9rem] w-[38ch] pt-2 lg:pt-3 transition-[opacity,transform] duration-400 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "opacity-100 translate-x-0 delay-150" : "opacity-0 translate-x-3 pointer-events-none"}`}
+                  >
+                    <div className="text-xs font-semibold text-muted tracking-wide">Adım {String(i + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}</div>
+                    <h3 className="mt-1.5 text-xl lg:text-2xl font-bold whitespace-nowrap">{s.t}</h3>
+                    <p className="mt-3 text-sm lg:text-[.95rem] text-body leading-relaxed">{s.d}</p>
                   </div>
                 </div>
               );
