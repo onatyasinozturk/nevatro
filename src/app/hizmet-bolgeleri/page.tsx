@@ -6,7 +6,7 @@ import { provinces, locative } from "@/lib/locations";
 import { site } from "@/data/site";
 import { bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Hizmet Bölgeleri", description: `${site.name} yerinde teknik destek ve dijital çözümler: hizmet verdiğimiz il ve ilçeler.`, alternates: { canonical: `${site.url}/hizmet-bolgeleri` } };
+export const metadata: Metadata = { title: "Hizmet Bölgeleri", description: `${site.name} yerinde teknik destek ve dijital çözümler: hizmet verdiğimiz il ve ilçeler.` };
 
 export default function Page() {
   return (

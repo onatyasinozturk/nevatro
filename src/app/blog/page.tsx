@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import { site } from "@/data/site";
 import Reveal from "@/components/Reveal";
 import { getAllPosts } from "@/lib/markdown";
 import { bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Blog", description: "Web, e-ticaret, pazaryeri, network ve güvenlik sistemleri üzerine rehberler.", alternates: { canonical: `${site.url}/blog` } };
+export const metadata: Metadata = { title: "Blog", description: "Web, e-ticaret, pazaryeri, network ve güvenlik sistemleri üzerine rehberler." };
 
 export default function Page() {
   const posts = getAllPosts();

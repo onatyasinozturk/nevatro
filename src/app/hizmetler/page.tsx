@@ -5,10 +5,9 @@ import ServiceCard from "@/components/ServiceCard";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { branches, byBranch } from "@/data/services";
-import { site } from "@/data/site";
 import { bannerImage, serviceImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Hizmetler", description: "Dijital çözümler ve IT çözümleri: web tasarım, e-ticaret, SEO, Google Ads, kurumsal IT, network, kamera ve teknik destek.", alternates: { canonical: `${site.url}/hizmetler` } };
+export const metadata: Metadata = { title: "Hizmetler", description: "Dijital çözümler ve IT çözümleri: web tasarım, e-ticaret, SEO, Google Ads, kurumsal IT, network, kamera ve teknik destek." };
 
 export default function Page() {
   return (

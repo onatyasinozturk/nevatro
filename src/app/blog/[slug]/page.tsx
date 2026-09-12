@@ -3,13 +3,12 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
 import { getAllPosts, getPost } from "@/lib/markdown";
-import { site } from "@/data/site";
 
 type Params = Promise<{ slug: string }>;
 export function generateStaticParams() { return getAllPosts().map((p) => ({ slug: p.slug })); }
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const p = await getPost((await params).slug); if (!p) return {};
-  return { title: p.title, description: p.excerpt, alternates: { canonical: `${site.url}/blog/${p.slug}` } };
+  return { title: p.title, description: p.excerpt };
 }
 
 export default async function Page({ params }: { params: Params }) {

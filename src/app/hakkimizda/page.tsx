@@ -4,16 +4,16 @@ import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 import Image from "next/image";
-import { img, bannerImage, IMAGE_SIZES } from "@/lib/images";
+import { img, bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Hakkımızda", description: `${site.name}: dijital ve IT çözümlerini tek noktadan sunan İstanbul merkezli teknoloji firması.`, alternates: { canonical: `${site.url}/hakkimizda` } };
+export const metadata: Metadata = { title: "Hakkımızda", description: `${site.name}: dijital ve IT çözümlerini tek noktadan sunan İstanbul merkezli teknoloji firması.` };
 
 export default function Page() {
   const photo = img("hakkimizda");
   return (
     <>
       <PageHeader kicker="Hakkımızda" title="Dijital ve teknik tarafı aynı ekipten alın" lead="Çoğu işletme web sitesi için bir ajansla, kamera için bir teknik servisle, network için başka biriyle uğraşır. Biz bu ikisini aynı çatı altında topladık." crumbs={[{ name: "Hakkımızda" }]} image={bannerImage("hizmetler")} />
-      {photo && (<section className="container-x pt-14"><Reveal className="relative w-full aspect-[3/2] overflow-hidden border border-line"><Image src={photo} alt={`${site.name} ekibi`} fill sizes={IMAGE_SIZES.full} priority className="object-cover object-center" /></Reveal></section>)}
+      {photo && (<section className="container-x pt-14"><Reveal className="relative h-[320px] md:h-[440px] rounded-[2px] overflow-hidden"><Image src={photo} alt={`${site.name} ekibi`} fill sizes="100vw" className="object-cover" /></Reveal></section>)}
       <section className="container-x py-14 grid lg:grid-cols-[1fr_1fr] gap-12">
         <Reveal className="prose-x">
           <h2>Kimiz?</h2>

@@ -10,8 +10,7 @@ import JsonLd from "@/components/JsonLd";
 import { branches, byBranch, getService, services, type Branch } from "@/data/services";
 import { site } from "@/data/site";
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import { bannerImage, serviceImage, IMAGE_SIZES } from "@/lib/images";
-import MediaFrame from "@/components/MediaFrame";
+import { bannerImage, serviceImage } from "@/lib/images";
 
 type Params = Promise<{ slug: string }>;
 const branchBySlug = (slug: string) => (Object.keys(branches) as Branch[]).find((b) => branches[b].slug === slug);
@@ -23,10 +22,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const b = branchBySlug(slug);
-  if (b) return { title: branches[b].title, description: branches[b].desc, alternates: { canonical: `${site.url}/hizmetler/${branches[b].slug}` } };
+  if (b) return { title: branches[b].title, description: branches[b].desc };
   const s = getService(slug);
   if (!s) return {};
-  return { title: `${s.title} | ${site.city}`, description: s.short, alternates: { canonical: `${site.url}/hizmetler/${s.slug}` } };
+  return { title: `${s.title} | ${site.city}`, description: s.short };
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -60,15 +59,10 @@ export default async function Page({ params }: { params: Params }) {
       <JsonLd data={serviceJsonLd(s.title, s.short, url)} />
       {s.faq.length > 0 && <JsonLd data={faqJsonLd(s.faq)} />}
       <JsonLd data={breadcrumbJsonLd([{ name: "Ana Sayfa", url: site.url }, { name: br.title, url: `${site.url}/hizmetler/${br.slug}` }, { name: s.title, url }])} />
-      <PageHeader kicker={br.title} title={s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} image={bannerImage("hizmetler")} />
+      <PageHeader kicker={br.title} title={s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} image={serviceImage(s.slug) ?? bannerImage("hizmetler")} />
 
       <section className="container-x py-14 grid lg:grid-cols-[1fr_340px] gap-10">
         <div>
-          {serviceImage(s.slug) && (
-            <Reveal className="mb-10">
-              <MediaFrame src={serviceImage(s.slug)!} alt={s.title} sizes={IMAGE_SIZES.detail} priority />
-            </Reveal>
-          )}
           <Reveal><h2 className="text-2xl font-bold">Ne yapıyoruz?</h2></Reveal>
           <div className="mt-5 card divide-y divide-line">
             {s.bullets.map((x, i) => <Reveal key={x} delay={i * 60} className="px-6 py-4 flex gap-3"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" /><span>{x}</span></Reveal>)}

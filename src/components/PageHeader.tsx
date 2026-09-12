@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Breadcrumbs from "./Breadcrumbs";
-import { IMAGE_SIZES } from "@/lib/images";
 
 export default function PageHeader({ kicker, title, lead, crumbs, image }:
   { kicker?: string; title: string; lead?: string; crumbs?: { name: string; href?: string }[]; image?: string | null }) {
   if (image) {
     return (
       <div className="relative bg-primary text-white overflow-hidden">
-        <Image src={image} alt="" fill priority sizes={IMAGE_SIZES.full} className="object-cover opacity-70" />
+        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/70 to-primary/25" />
         <div className="container-x relative z-10 py-16 md:py-24">
           {crumbs && <div className="[&_a]:text-white/70 [&_span]:text-white/70 [&_.text-primary]:text-white"><Breadcrumbs items={crumbs} /></div>}

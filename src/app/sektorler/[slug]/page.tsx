@@ -5,14 +5,13 @@ import PageHeader from "@/components/PageHeader";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { sectors, getSector } from "@/data/sectors";
-import { site } from "@/data/site";
 import { bannerImage } from "@/lib/images";
 
 type Params = Promise<{ slug: string }>;
 export function generateStaticParams() { return sectors.map((s) => ({ slug: s.slug })); }
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const s = getSector((await params).slug); if (!s) return {};
-  return { title: `${s.name} için Dijital ve IT Çözümleri`, description: s.problem, alternates: { canonical: `${site.url}/sektorler/${s.slug}` } };
+  return { title: `${s.name} için Dijital ve IT Çözümleri`, description: s.problem };
 }
 
 export default async function Page({ params }: { params: Params }) {

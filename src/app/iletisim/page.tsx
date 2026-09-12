@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
 import { bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "İletişim — Teklif Al", description: "Ücretsiz keşif ve teklif için bize ulaşın. Telefon, WhatsApp veya form.", alternates: { canonical: `${site.url}/iletisim` } };
+export const metadata: Metadata = { title: "İletişim — Teklif Al", description: "Ücretsiz keşif ve teklif için bize ulaşın. Telefon, WhatsApp veya form." };
 
 export default function Page() {
   return (
