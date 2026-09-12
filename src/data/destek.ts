@@ -15,10 +15,10 @@ export interface DestekItem {
 export const destek: DestekItem[] = [
   {
     slug: "bilgisayar-yavasladi",
-    title: "Bilgisayar yavaşladı, açılmıyor",
+    title: "Bilgisayarım yavaşladı, açılmıyor",
     short: "Açılış dakikalar sürüyor, programlar donuyor, mavi ekran geliyor.",
     intro: "Yavaşlamanın sebebi çoğu zaman tek bir şey değil. Disk, bellek, ısınma ve yazılım tarafını birlikte kontrol ediyor, cihazı yenilemeden önce yükseltmenin mantıklı olup olmadığını söylüyoruz.",
-    symptoms: ["Açılış birkaç dakika sürüyor", "Programlar takılıyor, donuyor", "Fan sürekli yüksek sesle çalışıyor", "Mavi ekran / beklenmedik kapanma"],
+    symptoms: ["Açılış birkaç dakika sürüyor", "Programlar takılıyor, donuyor", "Fan sürekli yüksek sesle çalışıyor", "Mavi ekran / beklenmedik kapanma", "Bilgisayar açılmıyor", "Wi-Fi görünmüyor"],
     approach: ["Disk ve bellek sağlık testi", "Isınma ve toz temizliği kontrolü", "SSD / RAM yükseltme önerisi", "Temiz kurulum ve veri aktarımı", "Yükseltme mi yenileme mi — net cevap"],
     service: "bilgisayar-sistemleri",
   },
