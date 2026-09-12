@@ -15,7 +15,7 @@ import { branches, byBranch, services } from "@/data/services";
 import { destek } from "@/data/destek";
 import { sectors } from "@/data/sectors";
 import { provinces, locative } from "@/lib/locations";
-import { heroSlideImage, serviceImage, destekImage, projectImage, sahaImages, img, IMAGE_SIZES } from "@/lib/images";
+import { heroSlideImage, serviceImage, projectImage, sahaImages, img, IMAGE_SIZES } from "@/lib/images";
 import { projects } from "@/data/projects";
 
 
@@ -92,7 +92,7 @@ export default function Home() {
           <Link href="/destek" className="font-display font-semibold text-accent shrink-0">Tümünü gör →</Link>
         </Reveal>
         <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} image={destekImage(d.slug)} /></Reveal>)}
+          {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} /></Reveal>)}
         </div>
       </section>
 

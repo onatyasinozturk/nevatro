@@ -46,26 +46,26 @@ export default function StatsCascade() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-primary text-white overflow-hidden">
+    <section ref={ref} className="bg-bg border-y border-line overflow-hidden">
       <div className="container-x py-16 md:py-24 grid lg:grid-cols-[.9fr_1.1fr] gap-12 lg:gap-20 items-center">
 
         {/* SOL — metin */}
         <div>
-          <div className="kicker text-it">Neden {site.name}?</div>
-          <h2 className="text-3xl md:text-[2.6rem] font-bold leading-[1.12] text-white">
+          <div className="kicker">Neden {site.name}?</div>
+          <h2 className="text-3xl md:text-[2.6rem] font-bold leading-[1.12]">
             Rakam için değil,<br />sahada durduğu için<br />bu işi yapıyoruz.
           </h2>
-          <p className="mt-5 text-white/70 max-w-[42ch]">
+          <p className="mt-5 text-body max-w-[42ch]">
             Kurulumu yapan da, bir hafta sonra telefonu açan da aynı ekip. {site.district} merkezli çalışıyor, {site.city} genelinde yerinde servis veriyoruz.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/iletisim" className="btn btn-accent">Ücretsiz keşif isteyin</Link>
-            <a href={site.phoneHref} className="btn btn-light">{site.phone}</a>
+            <a href={site.phoneHref} className="btn btn-outline">{site.phone}</a>
           </div>
         </div>
 
         {/* SAĞ — interaktif dikey liste (sabit yükseklik) */}
-        <div className="flex flex-col h-[400px] lg:h-[440px] border-b border-white/15" onMouseLeave={() => setActive(0)}>
+        <div className="flex flex-col h-[400px] lg:h-[440px] border-b border-line" onMouseLeave={() => setActive(0)}>
           {items.map((it, i) => {
             const on = i === active;
             return (
@@ -74,21 +74,21 @@ export default function StatsCascade() {
                 role="button" tabIndex={0} aria-expanded={on}
                 onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(i); } }}
-                className={`relative overflow-hidden basis-0 min-h-0 cursor-pointer border-t transition-[flex-grow,border-color] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "grow-[2.3] border-accent" : "grow border-white/15 hover:border-white/40"}`}
+                className={`relative overflow-hidden basis-0 min-h-0 cursor-pointer border-t transition-[flex-grow,border-color] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "grow-[2.3] border-accent" : "grow border-line hover:border-muted"}`}
               >
                 {/* sol vurgu çubuğu */}
                 <span className={`absolute left-0 top-0 bottom-0 w-[3px] bg-accent origin-top transition-transform duration-500 ${on ? "scale-y-100" : "scale-y-0"}`} aria-hidden />
 
                 <div className="pl-6 lg:pl-8 pt-4 lg:pt-5 flex items-baseline gap-5">
-                  <span className={`font-display font-extrabold tabular-nums leading-none tracking-[-.03em] shrink-0 transition-colors duration-400 ${on ? "text-accent" : "text-white/40"} ${"text" in it ? "text-[1.7rem] lg:text-[2.1rem]" : "text-[2.2rem] lg:text-[2.8rem]"}`}>
+                  <span className={`font-display font-extrabold tabular-nums leading-none tracking-[-.03em] shrink-0 transition-colors duration-400 ${on ? "text-accent" : "text-line"} ${"text" in it ? "text-[1.7rem] lg:text-[2.1rem]" : "text-[2.2rem] lg:text-[2.8rem]"}`}>
                     {"big" in it ? <Counter to={it.big} pad={it.pad} suffix={it.suffix} active={seen} /> : it.text}
                   </span>
-                  <span className={`text-sm lg:text-base transition-colors duration-400 ${on ? "text-white" : "text-white/60"}`}>{it.label}</span>
+                  <span className={`text-sm lg:text-base transition-colors duration-400 ${on ? "text-primary" : "text-muted"}`}>{it.label}</span>
                 </div>
 
                 <p
                   aria-hidden={!on}
-                  className={`absolute left-6 lg:left-8 right-0 top-[4.4rem] lg:top-[5.2rem] text-sm lg:text-[.95rem] text-white/70 leading-relaxed max-w-[46ch] transition-[opacity,transform] duration-400 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "opacity-100 translate-y-0 delay-150" : "opacity-0 translate-y-2 pointer-events-none"}`}
+                  className={`absolute left-6 lg:left-8 right-0 top-[4.4rem] lg:top-[5.2rem] text-sm lg:text-[.95rem] text-body leading-relaxed max-w-[46ch] transition-[opacity,transform] duration-400 ease-[cubic-bezier(.2,.7,.2,1)] ${on ? "opacity-100 translate-y-0 delay-150" : "opacity-0 translate-y-2 pointer-events-none"}`}
                 >
                   {it.detail}
                 </p>

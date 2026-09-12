@@ -4,7 +4,7 @@ import DestekCard from "@/components/DestekCard";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { destek } from "@/data/destek";
-import { bannerImage, destekImage } from "@/lib/images";
+import { bannerImage } from "@/lib/images";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function Page() {
         lead="Hizmet adı aramaya gerek yok. Aşağıdan yaşadığınız durumu seçin; belirtileri, nasıl teşhis ettiğimizi ve ne yaptığımızı anlatalım."
         crumbs={[{ name: "Destek Merkezi" }]} image={bannerImage("destek")} />
       <section className="container-x py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} image={destekImage(d.slug)} /></Reveal>)}
+        {destek.map((d, i) => <Reveal key={d.slug} delay={(i % 4) * 80}><DestekCard d={d} /></Reveal>)}
       </section>
       <CtaBand />
     </>
