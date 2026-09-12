@@ -74,7 +74,9 @@ export default async function Page({ params }: { params: Params }) {
           {s.faq.length > 0 && (<><Reveal className="mt-12"><h2 className="text-2xl font-bold">Sık sorulanlar</h2></Reveal><Reveal className="mt-5"><Faq items={s.faq} /></Reveal></>)}
         </div>
         <aside className="lg:sticky lg:top-24 self-start">
-          <div className="card p-6 bg-primary text-white border-primary">
+          {/* Sol sütundaki başlık kadar boşluk — kutu, yandaki liste kutusuyla aynı hizada başlasın */}
+          <div className="hidden lg:block text-2xl font-bold leading-[1.1] invisible" aria-hidden>&nbsp;</div>
+          <div className="card p-6 bg-primary text-white border-primary lg:mt-5">
             <div className="font-display font-bold text-lg text-white">Bu hizmet için teklif alın</div>
             <p className="mt-2 text-sm text-white/70">Keşif ücretsiz. Genellikle aynı gün dönüyoruz.</p>
             <Link href="/iletisim" className="btn btn-accent w-full mt-5">Teklif Al</Link>
