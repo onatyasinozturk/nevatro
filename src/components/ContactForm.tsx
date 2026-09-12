@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
+import { pushEvent } from "@/lib/gtm";
 
 /**
  * Form şimdilik WhatsApp'a yönlendiriyor (backend yok).
@@ -11,6 +12,7 @@ export default function ContactForm() {
   const [f, setF] = useState({ name: "", phone: "", service: "", msg: "" });
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    pushEvent("teklif_formu", { hizmet: f.service || "belirtilmedi" });
     const text = `Merhaba, ${f.name}. ${f.service ? `${f.service} hakkında ` : ""}teklif almak istiyorum. ${f.msg}${f.phone ? ` Tel: ${f.phone}` : ""}`;
     window.open(`${site.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
   };

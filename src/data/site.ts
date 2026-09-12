@@ -27,6 +27,8 @@ export const site = {
     facebook: "",
     linkedin: "",
   },
+  /** Google Tag Manager konteyner kimliği. Örn: "GTM-ABC1234". Boş bırakılırsa hiçbir script yüklenmez. */
+  gtmId: "GTM-WDL7C3R5",
   taxOffice: "[Vergi Dairesi]",
   taxNo: "[Vergi No]",
 };

@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import GoogleTagManager from "@/components/GoogleTagManager";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import { localBusinessJsonLd } from "@/lib/seo";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col">
+        <GoogleTagManager />
         <JsonLd data={localBusinessJsonLd()} />
         <Header />
         <main className="flex-1">{children}</main>
