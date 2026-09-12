@@ -115,3 +115,28 @@
 .scroll-rail__label { position:fixed; left:12px; bottom:26px; z-index:31; writing-mode:vertical-rl; font-family:var(--font-display); font-size:.72rem; letter-spacing:.08em; color:var(--c-muted); background:none; border:0; padding:6px 4px; cursor:pointer; transition:color .2s, opacity .3s; }
 .scroll-rail__label:hover { color:var(--c-primary); }
 @media (max-width:1380px) { .scroll-rail, .scroll-rail__label { display:none; } }
+
+
+/* ---------- istatistik kartları: kademeli (cascading) yerleşim ---------- */
+.stat-card {
+  display:flex; align-items:center; gap:1.25rem;
+  background:var(--c-surface); border:1px solid var(--c-line); border-radius:2px;
+  padding:1.1rem 1.4rem; position:relative;
+  opacity:0; transform:translateX(-60px);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+  transition-delay:var(--d,0ms);
+}
+.stat-card + .stat-card { margin-top:.6rem; }
+.stat-card.is-in { opacity:1; transform:none; }
+.stat-card--accent { background:var(--c-primary); border-color:var(--c-primary); }
+.stat-card:hover { z-index:2; }
+@media (min-width:1024px) {
+  /* her kart bir öncekinden biraz daha geniş: sağa doğru basamaklanır */
+  .stat-card { margin-right:calc((3 - var(--i)) * 2.6rem); padding:1.35rem 1.7rem; }
+  .stat-card + .stat-card { margin-top:-1px; }
+  .stat-card { transition-property:opacity, transform, margin-right; }
+  .stat-card:hover { margin-right:calc((3 - var(--i)) * 2.6rem - .75rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stat-card { opacity:1; transform:none; transition:none; }
+}

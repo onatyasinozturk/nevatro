@@ -23,3 +23,6 @@ export function sahaImages(): string[] {
 
 export const destekImage = (slug: string) => img(`destek/${slug}`);
 export const heroSlideImage = (n: number) => img(`hero-${n}`) ?? img("hero");
+
+// Ölçü sabitleri client bileşenlerden de kullanıldığı için ayrı dosyada:
+export { IMAGE_SIZES, MASTER_IMAGE } from "./image-sizes";

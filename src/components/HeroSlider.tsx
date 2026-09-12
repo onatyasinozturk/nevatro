@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/data/site";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 
 export interface Slide { kicker: string; title: string; text: string; href: string; cta: string; image: string | null }
 
+/**
+ * LAYOUT SHIFT YOK:
+ * - Section yüksekliği breakpoint başına sabit (min-h); slayt metni uzasa da değişmez.
+ * - Metin bloğu da sabit min-height alır; butonlar slaytlar arası zıplamaz.
+ * - Görseller mutlak konumlu + fill: kaynak dosyanın piksel ölçüsü yüksekliği ETKİLEMEZ.
+ */
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -19,20 +26,20 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const next = () => setI((x) => (x + 1) % slides.length);
 
   return (
-    <section className="relative bg-primary text-white overflow-hidden" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <section className="relative bg-primary text-white overflow-hidden min-h-[580px] md:min-h-[620px] lg:min-h-[660px] flex items-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {/* sağdaki fotoğraf bloğu */}
-      <div className="absolute inset-y-0 right-0 w-full lg:w-[52%] overflow-hidden">
+      <div className="absolute inset-y-0 right-0 w-full lg:w-[52%]">
         {slides.map((sl, n) => sl.image && (
-          <Image key={sl.image} src={sl.image} alt="" fill priority={n === 0} sizes="(max-width:1024px) 100vw, 52vw"
-            className={`object-cover transition-opacity duration-700 ${n === i ? "opacity-100" : "opacity-0"}`} />
+          <Image key={sl.image} src={sl.image} alt="" fill priority={n === 0} sizes={IMAGE_SIZES.heroHalf}
+            className={`object-cover object-center transition-opacity duration-700 ${n === i ? "opacity-100" : "opacity-0"}`} />
         ))}
         <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/55 lg:to-transparent" />
       </div>
 
-      <div className="container-x relative z-10 py-20 md:py-28 lg:py-32">
-        <div className="max-w-[34rem]">
+      <div className="container-x relative z-10 py-16 md:py-20 w-full">
+        <div className="max-w-[34rem] min-h-[330px] md:min-h-[345px] flex flex-col justify-center">
           <div key={`k${i}`} className="fade-in text-it text-sm font-semibold tracking-wide">{s.kicker}</div>
-          <h1 key={`t${i}`} className="fade-in mt-4 text-[2.3rem] md:text-[3.2rem] font-extrabold leading-[1.06] text-white" style={{ "--d": "80ms" } as React.CSSProperties}>{s.title}</h1>
+          <h1 key={`t${i}`} className="fade-in mt-4 text-[2.1rem] md:text-[3rem] font-extrabold leading-[1.06] text-white" style={{ "--d": "80ms" } as React.CSSProperties}>{s.title}</h1>
           <p key={`p${i}`} className="fade-in mt-5 text-lg text-white/75" style={{ "--d": "180ms" } as React.CSSProperties}>{s.text}</p>
           <div key={`b${i}`} className="fade-in mt-8 flex flex-wrap gap-3" style={{ "--d": "280ms" } as React.CSSProperties}>
             <Link href={s.href} className="btn btn-accent">{s.cta}</Link>
@@ -41,7 +48,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
         </div>
 
         {slides.length > 1 && (
-          <div className="mt-12 flex items-center gap-5 flex-wrap">
+          <div className="mt-10 flex items-center gap-5 flex-wrap">
             <div className="flex">
               <button onClick={prev} aria-label="Önceki slayt"
                 className="w-12 h-12 border border-white/25 hover:bg-white hover:text-primary text-white transition-colors grid place-items-center">
@@ -60,7 +67,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
                 </button>
               ))}
             </div>
-            <span className="text-xs text-white/35">{s.kicker}</span>
+            <span className="text-xs text-white/35 hidden sm:inline">{s.kicker}</span>
           </div>
         )}
       </div>

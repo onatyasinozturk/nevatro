@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 
 /** public/img/saha içinde fotoğraf varsa anasayfada "Sahadan" şeridi gösterir */
 export default function SahaGallery({ images }: { images: string[] }) {
@@ -11,7 +12,7 @@ export default function SahaGallery({ images }: { images: string[] }) {
         <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
           {images.slice(0, 8).map((src, i) => (
             <Reveal key={src} delay={i * 70} className={`relative overflow-hidden rounded-[2px] ${i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"}`}>
-              <Image src={src} alt="Sahadan kurulum fotoğrafı" fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover hover:scale-105 transition-transform duration-500" />
+              <Image src={src} alt="Sahadan kurulum fotoğrafı" fill sizes={IMAGE_SIZES.gallery} loading="lazy" className="object-cover hover:scale-105 transition-transform duration-500" />
             </Reveal>
           ))}
         </div>
