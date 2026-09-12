@@ -8,7 +8,8 @@ import JsonLd from "@/components/JsonLd";
 import { destek, getDestek } from "@/data/destek";
 import { getService } from "@/data/services";
 import { site } from "@/data/site";
-import { destekImage, bannerImage } from "@/lib/images";
+import { destekImage, bannerImage, IMAGE_SIZES } from "@/lib/images";
+import MediaFrame from "@/components/MediaFrame";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
@@ -29,10 +30,13 @@ export default async function Page({ params }: { params: Params }) {
       <JsonLd data={breadcrumbJsonLd([{ name: "Ana Sayfa", url: site.url }, { name: "Destek Merkezi", url: `${site.url}/destek` }, { name: d.title, url: `${site.url}/destek/${d.slug}` }])} />
       <PageHeader kicker="Destek Merkezi" title={d.title} lead={d.intro}
         crumbs={[{ name: "Destek Merkezi", href: "/destek" }, { name: d.title }]}
-        image={destekImage(d.slug) ?? bannerImage("destek")} />
+        image={bannerImage("destek")} />
 
       <section className="container-x py-14 grid lg:grid-cols-[1fr_340px] gap-10">
         <div>
+          {destekImage(d.slug) && (
+            <Reveal className="mb-10"><MediaFrame src={destekImage(d.slug)!} alt={d.title} sizes={IMAGE_SIZES.detail} priority /></Reveal>
+          )}
           <Reveal><h2 className="text-2xl font-bold">Bunları yaşıyorsanız</h2></Reveal>
           <div className="mt-5 grid sm:grid-cols-2 gap-3">
             {d.symptoms.map((x, i) => (

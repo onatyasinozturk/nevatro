@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { DestekItem } from "@/data/destek";
+import { IMAGE_SIZES } from "@/lib/images";
 
 export default function DestekCard({ d, image }: { d: DestekItem; image?: string | null }) {
   return (
     <Link href={`/destek/${d.slug}`} className="card-hard group flex flex-col h-full overflow-hidden">
-      <div className="relative h-36 shrink-0 bg-primary overflow-hidden border-b border-line">
+      <div className="relative w-full aspect-[3/2] shrink-0 bg-primary overflow-hidden border-b border-line">
         {image
-          ? <Image src={image} alt={d.title} fill sizes="(max-width:768px) 100vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+          ? <Image src={image} alt={d.title} fill sizes={IMAGE_SIZES.card} loading="lazy" className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]" />
           : <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-2" />}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/55 to-transparent" />
       </div>

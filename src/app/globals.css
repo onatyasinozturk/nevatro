@@ -115,3 +115,11 @@
 .scroll-rail__label { position:fixed; left:12px; bottom:26px; z-index:31; writing-mode:vertical-rl; font-family:var(--font-display); font-size:.72rem; letter-spacing:.08em; color:var(--c-muted); background:none; border:0; padding:6px 4px; cursor:pointer; transition:color .2s, opacity .3s; }
 .scroll-rail__label:hover { color:var(--c-primary); }
 @media (max-width:1380px) { .scroll-rail, .scroll-rail__label { display:none; } }
+
+
+/* ---------- istatistik kartları: kademeli (cascading) yerleşim ---------- */
+/* Mobilde düz liste, lg üstünde sağa doğru basamaklanır */
+[data-anim="card"] { --step-0: 0; --step-1: 0; --step-2: 0; --step-3: 0; position: relative; overflow: hidden; }
+@media (min-width: 1024px) {
+  [data-anim="card"] { --step-0: 0rem; --step-1: 2.5rem; --step-2: 5rem; --step-3: 7.5rem; }
+}

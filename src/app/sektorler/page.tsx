@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
+import { site } from "@/data/site";
 import CtaBand from "@/components/CtaBand";
 import Reveal from "@/components/Reveal";
 import { sectors } from "@/data/sectors";
 import { bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Sektörler", description: "Site yönetimi, restoran, ofis, fabrika, mağaza, klinik, okul ve e-ticaret satıcıları için sektöre özel dijital ve IT çözümleri." };
+export const metadata: Metadata = { title: "Sektörler", description: "Site yönetimi, restoran, ofis, fabrika, mağaza, klinik, okul ve e-ticaret satıcıları için sektöre özel dijital ve IT çözümleri.", alternates: { canonical: `${site.url}/sektorler` } };
 
 export default function Page() {
   return (

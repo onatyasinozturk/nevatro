@@ -9,8 +9,7 @@ import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Destek Merkezi",
-  description: `Bilgisayar yavaşlaması, internet kopması, veri kaybı, kamera arızası ve daha fazlası. Yaşadığınız sorunu seçin, ${site.name} nasıl çözdüğünü anlatsın.`,
-};
+  description: `Bilgisayar yavaşlaması, internet kopması, veri kaybı, kamera arızası ve daha fazlası. Yaşadığınız sorunu seçin, ${site.name} nasıl çözdüğünü anlatsın.`, alternates: { canonical: `${site.url}/destek` } };
 
 export default function Page() {
   return (

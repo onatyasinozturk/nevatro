@@ -3,7 +3,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import ScrollRail from "@/components/ScrollRail";
 import HeroSlider from "@/components/HeroSlider";
-import TrustStrip from "@/components/TrustStrip";
+import StatsSection from "@/components/StatsSection";
 import ServiceCard from "@/components/ServiceCard";
 import DestekCard from "@/components/DestekCard";
 import SahaGallery from "@/components/SahaGallery";
@@ -14,7 +14,7 @@ import { branches, byBranch, services } from "@/data/services";
 import { destek } from "@/data/destek";
 import { sectors } from "@/data/sectors";
 import { provinces, locative } from "@/lib/locations";
-import { heroSlideImage, serviceImage, destekImage, projectImage, sahaImages, img } from "@/lib/images";
+import { heroSlideImage, serviceImage, destekImage, projectImage, sahaImages, IMAGE_SIZES } from "@/lib/images";
 import { projects } from "@/data/projects";
 
 const steps = [
@@ -37,7 +37,6 @@ export default function Home() {
   const ist = provinces.find((p) => p.slug === "istanbul");
   const area = site.serviceArea.map((n) => ist?.districts.find((d) => d.name === n)).filter(Boolean) as { name: string; slug: string }[];
   const saha = sahaImages();
-  const about = img("hakkimizda");
   const grid = ["kamera-alarm", "network-altyapi", "kurumsal-it", "bilgisayar-sistemleri", "web-tasarim", "e-ticaret", "google-ads", "pazaryeri-danismanligi"]
     .map((s) => services.find((x) => x.slug === s)!);
 
@@ -51,8 +50,6 @@ export default function Home() {
     <>
       <ScrollRail />
       <HeroSlider slides={slides} />
-      <div className="h-8 md:h-12 bg-bg" />
-      <TrustStrip />
 
       {/* HİZMETLER */}
       <section className="container-x py-16 md:py-20">
@@ -61,7 +58,7 @@ export default function Home() {
           <Link href="/hizmetler" className="font-display font-semibold text-accent shrink-0">Tüm hizmetler →</Link>
         </Reveal>
         <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 80}><ServiceCard s={s} image={serviceImage(s.slug)} /></Reveal>)}
+          {grid.map((s, i) => <Reveal key={s.slug} delay={(i % 4) * 80}><ServiceCard s={s} image={serviceImage(s.slug)} priority={i < 4} /></Reveal>)}
         </div>
       </section>
 
@@ -104,26 +101,7 @@ export default function Home() {
 
       <SahaGallery images={saha} />
 
-      {/* HAKKIMIZDA ŞERİDİ */}
-      <section className="bg-surface border-y border-line">
-        <div className="container-x py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal className="relative h-[280px] md:h-[380px] overflow-hidden bg-primary border border-line">
-            {about
-              ? <Image src={about} alt={`${site.name} ekibi`} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
-              : <div className="absolute inset-0 grid place-items-center text-white/30 text-sm">img/hakkimizda.jpg</div>}
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="kicker">Hakkımızda</div>
-            <h2 className="text-3xl md:text-4xl font-bold max-w-[20ch]">{site.experienceYears} yılı aşkın saha tecrübesi</h2>
-            <p className="mt-5 text-body max-w-[52ch]">Çoğu işletme web sitesi için bir ajansla, kamera için bir teknik servisle, network için başka biriyle uğraşır. Üç firmanın birbirini suçladığı yerde iş durur. {site.name} bu ikisini aynı çatı altında topladı.</p>
-            <p className="mt-4 text-body max-w-[52ch]">{site.district} merkezli çalışıyor, {site.city} genelinde yerinde servis veriyoruz. Dijital tarafta ise konumdan bağımsız, online.</p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/hakkimizda" className="btn btn-outline">Bizi tanıyın</Link>
-              <a href={site.phoneHref} className="btn btn-accent">{site.phone}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <StatsSection />
 
       {/* SÜREÇ */}
       <section className="container-x py-16 md:py-20">
@@ -170,8 +148,8 @@ export default function Home() {
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
               <Link href="/projeler" className="card-hard group flex flex-col h-full overflow-hidden">
-                <div className="relative h-44 shrink-0 bg-primary overflow-hidden border-b border-line">
-                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes="33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />}
+                <div className="relative w-full aspect-[3/2] shrink-0 bg-primary overflow-hidden border-b border-line">
+                  {projectImage(p.slug) && <Image src={projectImage(p.slug)!} alt={p.title} fill sizes={IMAGE_SIZES.card3} loading="lazy" className="object-cover object-center group-hover:scale-[1.04] transition-transform duration-500" />}
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-lg font-bold clamp-1">{p.title}</h3>
