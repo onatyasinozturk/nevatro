@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import ScrollRail from "@/components/ScrollRail";
 import HeroSlider from "@/components/HeroSlider";
 import StatsCascade from "@/components/StatsCascade";
+import ProcessSteps from "@/components/ProcessSteps";
 import ServiceCard from "@/components/ServiceCard";
 import DestekCard from "@/components/DestekCard";
 import SahaGallery from "@/components/SahaGallery";
@@ -17,12 +18,6 @@ import { provinces, locative } from "@/lib/locations";
 import { heroSlideImage, serviceImage, destekImage, projectImage, sahaImages, img, IMAGE_SIZES } from "@/lib/images";
 import { projects } from "@/data/projects";
 
-const steps = [
-  { n: "01", t: "İhtiyaç Analizi", d: "Yerinde ya da telefonda keşif. Mevcut durumu ve hedefi netleştiriyoruz." },
-  { n: "02", t: "Planlama", d: "Kalem kalem teklif, zaman planı ve alternatifler. Sürpriz kalem yok." },
-  { n: "03", t: "Kurulum", d: "Planlı günde, işinizi aksatmadan. Etiketli, belgeli, teslim tutanaklı." },
-  { n: "04", t: "Destek", d: "Kurulum bitince biten bir iş değil. Bakım, izleme ve geliştirme." },
-];
 
 const faq = [
   { q: "Keşif ücretli mi?", a: `Hayır. ${site.city} içinde yerinde keşif ve teklif ücretsiz, teklifi kabul etme zorunluluğu yok.` },
@@ -51,7 +46,7 @@ export default function Home() {
     <>
       <ScrollRail />
       <HeroSlider slides={slides} />
-      <StatsCascade />
+      <ProcessSteps />
 
       {/* HİZMETLER */}
       <section className="container-x py-16 md:py-20">
@@ -124,19 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SÜREÇ */}
-      <section className="container-x py-16 md:py-20">
-        <Reveal><div className="kicker">Nasıl çalışıyoruz?</div><h2 className="text-3xl md:text-4xl font-bold">Keşiften bakıma dört adım</h2></Reveal>
-        <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-4 card-hard divide-y sm:divide-y-0 sm:divide-x divide-line">
-          {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 110} className="p-7">
-              <div className="font-display text-3xl font-extrabold text-accent">{s.n}</div>
-              <h3 className="mt-3 text-lg font-bold">{s.t}</h3>
-              <p className="mt-2 text-sm text-body">{s.d}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <StatsCascade />
 
       {/* SEKTÖRLER */}
       <section className="bg-surface border-y border-line">
