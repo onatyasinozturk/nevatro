@@ -13,7 +13,7 @@ export default function Page() {
   const posts = getAllPosts();
   return (
     <>
-      <PageHeader kicker="Blog" title="Rehberler ve notlar" lead="Sahada karşılaştığımız soruların cevapları. Yeni yazı eklemek için content/blog klasörüne bir .md dosyası koymanız yeterli." crumbs={[{ name: "Blog" }]} image={bannerImage("blog")} />
+      <PageHeader kicker="Blog" title="Rehberler ve notlar" lead="Sahada karşılaştığımız soruların cevapları." crumbs={[{ name: "Blog" }]} image={bannerImage("blog")} />
       <section className="container-x py-14">
         {posts.length === 0 && <p className="text-muted">Henüz yazı yok.</p>}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
