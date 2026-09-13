@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import Image from "next/image";
 import { getAllPosts, getPost } from "@/lib/markdown";
+import { IMAGE_SIZES } from "@/lib/image-sizes";
 
 type Params = Promise<{ slug: string }>;
 export function generateStaticParams() { return getAllPosts().map((p) => ({ slug: p.slug })); }
@@ -20,6 +22,11 @@ export default async function Page({ params }: { params: Params }) {
         <div className="text-sm text-muted">{p.category ?? "Genel"} — {p.date}</div>
         <h1 className="mt-2 text-4xl md:text-5xl font-bold max-w-[24ch]">{p.title}</h1>
         {p.excerpt && <p className="mt-4 text-lg text-body max-w-[60ch]">{p.excerpt}</p>}
+        {p.cover && (
+          <div className="relative w-full aspect-[3/2] mt-8 overflow-hidden border border-line bg-primary max-w-[860px]">
+            <Image src={p.cover} alt={p.title} fill priority sizes={IMAGE_SIZES.full} className="object-cover object-center" />
+          </div>
+        )}
         <div className="prose-x mt-10" dangerouslySetInnerHTML={{ __html: p.html }} />
       </article>
       <CtaBand />
