@@ -12,5 +12,3 @@ Esenyurt bizim merkez bölgemiz. Kıraç'tan Akçaburgaz'a, Mehterçeşme'den G�
 - Aynı gün yerinde keşif: ekip zaten bölgede
 - Mevcut sistemi sıfırlamadan, ihtiyaç kadar yenileme
 - Esenyurt'taki site yönetimleri için yönetim kuruluna sunulabilir, kalem kalem teklif
-
-*(Bu metin örnektir; ilçeye özel 300-400 kelime özgün içerikle genişletin. Diğer ilçeler için bu klasöre `<ilce-slug>.md` ekleyin.)*
