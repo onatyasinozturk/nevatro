@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
+import gfm from "remark-gfm";
 
 export interface PostMeta { slug: string; title: string; date: string; excerpt: string; category?: string; cover?: string }
 export interface Post extends PostMeta { html: string }
@@ -11,7 +12,9 @@ const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 const BOLGE_DIR = path.join(process.cwd(), "content", "bolgeler");
 
 export async function mdToHtml(md: string) {
-  const out = await remark().use(html, { sanitize: false }).process(md);
+  // remark-gfm: tablo, görev listesi (- [ ]), üstü çizili, otomatik link desteği.
+  // Bu eklenti olmadan markdown tabloları düz metin olarak basılır.
+  const out = await remark().use(gfm).use(html, { sanitize: false }).process(md);
   return String(out);
 }
 
