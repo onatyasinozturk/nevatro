@@ -1,41 +1,35 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import PageHeader from "@/components/PageHeader";
-import Reveal from "@/components/Reveal";
+import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import CtaBand from "@/components/CtaBand";
 import Image from "next/image";
-import { getAllPosts } from "@/lib/markdown";
+import { getAllPosts, getPost } from "@/lib/markdown";
 import { IMAGE_SIZES } from "@/lib/image-sizes";
-import { bannerImage } from "@/lib/images";
 
-export const metadata: Metadata = { title: "Blog", description: "Web, e-ticaret, pazaryeri, network ve güvenlik sistemleri üzerine rehberler." };
+type Params = Promise<{ slug: string }>;
+export function generateStaticParams() { return getAllPosts().map((p) => ({ slug: p.slug })); }
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const p = await getPost((await params).slug); if (!p) return {};
+  return { title: p.title, description: p.excerpt };
+}
 
-export default function Page() {
-  const posts = getAllPosts();
+export default async function Page({ params }: { params: Params }) {
+  const p = await getPost((await params).slug); if (!p) notFound();
   return (
     <>
-      <PageHeader kicker="Blog" title="Rehberler ve notlar" lead="Sahada karşılaştığımız soruların cevapları. Yeni yazı eklemek için content/blog klasörüne bir .md dosyası koymanız yeterli." crumbs={[{ name: "Blog" }]} image={bannerImage("blog")} />
-      <section className="container-x py-14">
-        {posts.length === 0 && <p className="text-muted">Henüz yazı yok.</p>}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {posts.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 90}>
-              <Link href={`/blog/${p.slug}`} className="card-hard flex flex-col h-full overflow-hidden">
-                {p.cover && (
-                  <div className="relative w-full aspect-[3/2] shrink-0 border-b border-line bg-primary overflow-hidden">
-                    <Image src={p.cover} alt={p.title} fill sizes={IMAGE_SIZES.card3} loading="lazy" className="object-cover object-center" />
-                  </div>
-                )}
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="text-xs text-muted">{p.category ?? "Genel"} — {p.date}</div>
-                  <h2 className="mt-2 text-lg font-bold clamp-2 min-h-[3.2rem]">{p.title}</h2>
-                  <p className="mt-2 text-sm text-body clamp-2 min-h-[2.7rem]">{p.excerpt}</p>
-                  <span className="mt-auto pt-4 text-sm font-display font-semibold text-accent">Yazıyı oku →</span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <article className="container-x py-12 md:py-16">
+        <Breadcrumbs items={[{ name: "Blog", href: "/blog" }, { name: p.title }]} />
+        <div className="text-sm text-muted">{p.category ?? "Genel"} — {p.date}</div>
+        <h1 className="mt-2 text-4xl md:text-5xl font-bold max-w-[24ch]">{p.title}</h1>
+        {p.excerpt && <p className="mt-4 text-lg text-body max-w-[60ch]">{p.excerpt}</p>}
+        {p.cover && (
+          <div className="relative w-full aspect-[3/2] mt-8 overflow-hidden border border-line bg-primary max-w-[860px]">
+            <Image src={p.cover} alt={p.title} fill priority sizes={IMAGE_SIZES.full} className="object-cover object-center" />
+          </div>
+        )}
+        <div className="prose-x mt-10" dangerouslySetInnerHTML={{ __html: p.html }} />
+      </article>
+      <CtaBand />
     </>
   );
 }
