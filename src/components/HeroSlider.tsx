@@ -16,21 +16,30 @@ export interface Slide { kicker: string; title: string; text: string; href: stri
 export default function HeroSlider({ slides }: { slides: Slide[] }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Sadece gösterilmiş slaytların görseli indirilir. Üçünün aynı anda inmesi
+  // ilk görselin ekrana gelmesini geciktiriyordu (LCP 6,4 sn).
+  const [loaded, setLoaded] = useState<number[]>([0]);
+  const show = (n: number) => { setI(n); setLoaded((p) => (p.includes(n) ? p : [...p, n])); };
   useEffect(() => {
     if (paused || slides.length < 2) return;
-    const t = setInterval(() => setI((x) => (x + 1) % slides.length), 6500);
+    const t = setInterval(() => { setI((x) => { const n = (x + 1) % slides.length; setLoaded((p) => (p.includes(n) ? p : [...p, n])); return n; }); }, 6500);
     return () => clearInterval(t);
   }, [paused, slides.length]);
   const s = slides[i];
-  const prev = () => setI((x) => (x - 1 + slides.length) % slides.length);
-  const next = () => setI((x) => (x + 1) % slides.length);
+  const prev = () => show((i - 1 + slides.length) % slides.length);
+  const next = () => show((i + 1) % slides.length);
 
   return (
     <section className="relative bg-primary text-white overflow-hidden min-h-[580px] md:min-h-[620px] lg:min-h-[660px] flex items-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {/* sağdaki fotoğraf bloğu */}
       <div className="absolute inset-y-0 right-0 w-full lg:w-[52%]">
-        {slides.map((sl, n) => sl.image && (
-          <Image key={sl.image} src={sl.image} alt="" fill priority={n === 0} sizes={IMAGE_SIZES.heroHalf}
+        {slides.map((sl, n) => sl.image && loaded.includes(n) && (
+          <Image key={sl.image} src={sl.image} alt="" fill
+            priority={n === 0}
+            fetchPriority={n === 0 ? "high" : "auto"}
+            loading={n === 0 ? "eager" : "lazy"}
+            quality={70}
+            sizes={IMAGE_SIZES.heroHalf}
             className={`object-cover object-center transition-opacity duration-700 ${n === i ? "opacity-100" : "opacity-0"}`} />
         ))}
         <div className="absolute inset-0 bg-primary/55 lg:bg-gradient-to-r lg:from-primary lg:via-primary/55 lg:to-transparent" />
@@ -61,7 +70,7 @@ export default function HeroSlider({ slides }: { slides: Slide[] }) {
             </div>
             <div className="flex items-center gap-3">
               {slides.map((sl, n) => (
-                <button key={n} onClick={() => setI(n)} aria-label={sl.kicker} title={sl.kicker}
+                <button key={n} onClick={() => show(n)} aria-label={sl.kicker} title={sl.kicker}
                   className={`text-xs font-display font-semibold tracking-wide pb-1 border-b-2 transition-colors ${n === i ? "text-white border-accent" : "text-white/40 border-transparent hover:text-white/80"}`}>
                   {String(n + 1).padStart(2, "0")}
                 </button>

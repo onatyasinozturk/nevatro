@@ -20,7 +20,7 @@ export const IMAGE_SIZES = {
   /** Tam genişlik kapak / banner */
   full: "100vw",
   /** Hero'nun sağ yarısı */
-  heroHalf: "(max-width: 1024px) 100vw, 52vw",
+  heroHalf: "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 52vw",
   /** Saha galerisi kareleri */
   gallery: "(max-width: 768px) 50vw, 320px",
 } as const;

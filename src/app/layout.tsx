@@ -22,8 +22,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+        {/*
+          Font CSS'i "render engelleyen" istek olmaktan çıkarıldı.
+          media="print" ile indirilir; indikten sonra aşağıdaki küçük script
+          media="all" yapar. Böylece sayfanın ilk çizimi fontu beklemez.
+          (Sunucu bileşeninde onLoad kullanılamadığı için script ile yapılıyor.)
+        */}
+        <link
+          id="gfonts"
+          rel="stylesheet"
+          media="print"
+          href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600&display=swap"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.getElementById('gfonts');if(!l)return;function go(){l.media='all'}if(l.sheet){go()}else{l.addEventListener('load',go);setTimeout(go,2500)}})();`,
+          }}
+        />
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600&display=swap" />
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col">
         <GoogleTagManager />
