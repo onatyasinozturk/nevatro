@@ -9,6 +9,15 @@ export interface Service {
   bullets: string[];      // ne yapıyoruz
   outcomes: string[];     // ne elde edersiniz
   faq: { q: string; a: string }[];
+  /** Sayfada H1 olarak kullanılır. Yoksa title kullanılır.
+   *  Menüdeki kısa ad ile sayfadaki arama-odaklı başlığı ayırmaya yarar. */
+  h1?: string;
+  /** <title> etiketi. Yoksa "title | şehir" kurgusu kullanılır. */
+  metaTitle?: string;
+  /** meta description. Yoksa short kullanılır. */
+  metaDescription?: string;
+  /** Uzun içerik (Markdown). Reklam trafiği alan sayfalarda doldurulur. */
+  body?: string;
 }
 
 export const branches: Record<Branch, { slug: string; name: string; title: string; claim: string; desc: string }> = {
@@ -110,11 +119,58 @@ export const services: Service[] = [
   },
   {
     slug: "bilgisayar-sistemleri", branch: "it", title: "Bilgisayar Sistemleri",
+    h1: "Bilgisayar Tamiri ve Yerinde Teknik Servis",
+    metaTitle: "Bilgisayar Tamiri Beylikdüzü, Esenyurt, Avcılar | Yerinde Servis",
+    metaDescription: "Beylikdüzü, Esenyurt ve Avcılar'da yerinde bilgisayar tamiri ve teknik servis. Arıza tespiti ücretsiz, aynı gün müdahale, faturalı ve garantili işçilik.",
     short: "Kurulum, bakım ve yerinde teknik servis.",
-    intro: "Masaüstü ve dizüstü bilgisayarlar için kurulum, format, donanım yükseltme, arıza tespiti ve yerinde teknik servis.",
-    bullets: ["Yeni cihaz kurulumu ve veri aktarımı", "Arıza tespiti ve onarım", "Donanım yükseltme (SSD, RAM)", "Antivirüs ve güvenlik ayarları", "Periyodik bakım"],
-    outcomes: ["Yavaşlayan cihazların hızlanması", "Veri kaybı olmadan onarım", "Aynı gün yerinde müdahale"],
-    faq: [],
+    intro: "Masaüstü ve dizüstü bilgisayarlarda arıza tespiti, onarım, format, donanım yükseltme ve periyodik bakım. Beylikdüzü, Esenyurt ve Avcılar'da yerinde servis; arıza tespiti ücretsiz.",
+    bullets: ["Ücretsiz arıza tespiti ve ön bilgilendirme", "Yerinde onarım — cihazı bırakmanıza gerek yok", "Donanım yükseltme (SSD, RAM) ile hızlandırma", "Format, işletim sistemi ve veri aktarımı", "Virüs ve fidye yazılımı temizliği", "Kurumsal cihazlar için periyodik bakım"],
+    outcomes: ["Yavaşlayan cihaz yenilemeden hızlanır", "Veriniz kaybolmadan geri gelir", "Aynı gün yerinde müdahale", "Faturalı, garantili işçilik", "Tek muhatap, tek numara", "İş kaybı en aza iner"],
+    faq: [
+      { q: "Cihazı size getirmem mi gerekiyor?", a: "Hayır. Beylikdüzü, Esenyurt ve Avcılar'da yerinde servis veriyoruz; işlemlerin büyük kısmını sizin ofisinizde ya da evinizde tamamlıyoruz. Yalnızca laboratuvar gerektiren durumlarda (örneğin ileri seviye anakart onarımı) cihazı yanımıza alıyoruz ve bunu baştan söylüyoruz." },
+      { q: "Arıza tespiti ücretli mi?", a: "Hayır. Yerinde arıza tespiti ve fiyat bilgisi ücretsiz. Ne yapılacağını ve ne kadar tutacağını öğrendikten sonra işlemi onaylamama hakkınız var; onaylamazsanız hiçbir ücret çıkmaz." },
+      { q: "Ne kadar sürede gelebiliyorsunuz?", a: "Beylikdüzü, Esenyurt ve Avcılar öncelikli hizmet bölgemiz; mesai saatleri içinde gelen taleplerin çoğuna aynı gün dönüyoruz. Yazılım kaynaklı sorunlarda önce uzaktan bağlanıp deniyoruz, çözülürse beklemenize bile gerek kalmıyor." },
+      { q: "Verilerim kaybolur mu?", a: "Format ve işletim sistemi kurulumu öncesinde verilerinizi yedekliyoruz. Disk arızalıysa önce kurtarma denemesi yapıyor, şansı ve maliyeti size söyledikten sonra devam ediyoruz. Onayınız olmadan hiçbir veri silinmiyor." },
+      { q: "Ne kadar tutar?", a: "İşleme göre değişir. Format ve kurulum, SSD takma, temizlik-bakım gibi standart işlerde fiyat keşifte netleşir ve yazılı verilir. Parça gerekiyorsa parça ve işçilik ayrı ayrı gösterilir; sürpriz kalem çıkarmıyoruz." },
+      { q: "Bilgisayarı yenilesem mi, tamir mi ettirsem?", a: "Çoğu zaman gerek yok. 5-6 yaşındaki bir bilgisayarda SSD ve RAM yükseltmesi cihazı gözle görülür şekilde hızlandırıyor ve yeni cihaz almanın çok altında maliyetle çözüyor. Tespitte hangisinin mantıklı olduğunu rakamla söylüyoruz — yenilemek gerekiyorsa da onu söylüyoruz." },
+      { q: "Faturalı çalışıyor musunuz?", a: "Evet, tüm işlerimiz faturalı. Kurumsal müşterilerimizle bakım sözleşmesiyle ilerliyoruz; işçiliğe garanti veriyor, kullanılan parçalar üretici garantisi kapsamında kalıyor." },
+      { q: "Birden fazla bilgisayarımız var, toplu bakım yapıyor musunuz?", a: "Evet. Ofislerde cihaz sayısına göre periyodik bakım planı çıkarıyoruz: temizlik, disk sağlığı kontrolü, güncelleme ve yedekleme kontrolü. Böylece arızalar büyümeden yakalanıyor ve aylık maliyetiniz sabit kalıyor." },
+    ],
+    body: `## Bilgisayarınız yavaşladıysa yenilemeden önce bir baktırın
+
+Sahada en sık karşılaştığımız durum şu: cihaz "eskidi" diye yenilenmek isteniyor, incelediğimizde sorun disk, ısınma ya da yazılım kaynaklı çıkıyor. Bir SSD yükseltmesi 6 yaşındaki bir bilgisayarı çoğu zaman yeni cihaz hissine yaklaştırıyor ve maliyeti yenilemenin çok altında kalıyor.
+
+Biz önce ölçüyoruz. Disk sağlığı, bellek testi, ısı değerleri ve açılışta çalışan servisler kontrol edilmeden "format atalım" demiyoruz. Çünkü format, donanım kaynaklı bir sorunu birkaç haftalığına gizlemekten başka işe yaramaz.
+
+## Hangi işleri yapıyoruz?
+
+**Arıza tespiti ve onarım.** Açılmayan, mavi ekran veren, kendiliğinden kapanan cihazlarda önce nedeni buluyoruz. Güç kaynağı, bellek, disk, ısınma — hangisiyse onu söylüyoruz.
+
+**Donanım yükseltme.** SSD ve RAM yükseltmesi, yavaşlık şikâyetlerinin büyük kısmını tek başına çözer. Mevcut verilerinizi yeni diske aktarıyoruz, sıfırdan kurulum yapmak zorunda kalmıyorsunuz.
+
+**Format, kurulum ve veri aktarımı.** İşletim sistemi kurulumu, sürücüler, ofis programları ve önceki verilerinizin taşınması. Cihazı çalışır halde teslim ediyoruz, "sürücüleri sen bulursun" demiyoruz.
+
+**Virüs ve fidye yazılımı temizliği.** Zararlı yazılım temizliği, tarayıcı eklentilerinin kaldırılması, güvenlik ayarlarının düzeltilmesi. Fidye yazılımı durumunda önce yayılımı durduruyor, sonra yedekten dönüş şansını değerlendiriyoruz.
+
+**Periyodik bakım.** Ofislerde cihazlar toplu olarak bakımdan geçiriliyor: iç temizlik, termal macun, disk sağlığı, güncellemeler, yedekleme kontrolü. Arızayı büyümeden yakalamanın en ucuz yolu bu.
+
+## Nasıl çalışıyoruz?
+
+Telefonla ya da WhatsApp'tan durumu anlatıyorsunuz. Yazılım kaynaklı görünen sorunlarda önce uzaktan bağlanmayı deniyoruz — çözülürse yerinde servise gerek kalmıyor.
+
+Yerinde müdahale gerekiyorsa gün ve saat belirliyoruz. Tespitten sonra ne yapılacağını ve ne tutacağını söylüyoruz; onaylarsanız işleme geçiyoruz. Parça gerekiyorsa parça ve işçilik ayrı gösteriliyor.
+
+İş bittiğinde cihazı çalışır halde teslim ediyor, yapılan işlemleri yazılı olarak bırakıyoruz. Sonrasında bir sorun olursa aranacak numara belli.
+
+## Kurumsal bilgisayar desteği
+
+Beş cihazın üstüne çıkan ofislerde tek tek arıza gidermek yerine bakım sözleşmesi daha mantıklı oluyor. Aylık sabit ücretle cihazlar düzenli kontrol ediliyor, arıza durumunda öncelikli müdahale yapılıyor, çoğu sorun uzaktan çözülüyor.
+
+Bu yapı özellikle muhasebe, teklif ve müşteri verisinin tek bir bilgisayarda durduğu işletmeler için önemli. O cihaz bozulduğunda iş günlerce durabilir; düzenli kontrol ve yedekleme bunu baştan engelliyor.
+
+## Hizmet bölgemiz
+
+Beylikdüzü, Esenyurt ve Avcılar öncelikli bölgemiz — buralara aynı gün dönüyoruz. Büyükçekmece, Başakşehir, Küçükçekmece ve çevresine de yerinde servis veriyoruz, keşfi genellikle 1-2 iş günü içinde planlıyoruz.`,
   },
   {
     slug: "kamera-alarm", branch: "it", title: "Kamera & Alarm Sistemleri",

@@ -20,7 +20,7 @@ export default function Footer() {
             {site.hours.map((h) => <div key={h.d} className="flex justify-between max-w-[15rem]"><span>{h.d}</span><span className="text-white">{h.h}</span></div>)}
           </div>
           <div className="mt-4 text-xs leading-7">
-            {site.legalName}<br />{site.addressFull}<br />
+            {site.legalName && !site.legalName.startsWith("[") ? <>{site.legalName}<br /></> : null}{site.addressFull}<br />
             <a href={site.phoneHref} className="text-white">{site.phone}</a> — <a href={`mailto:${site.email}`} className="text-white">{site.email}</a>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x py-4 flex flex-wrap justify-between gap-2 text-xs text-white/50">
           <span>© {new Date().getFullYear()} {site.name}. Tüm hakları saklıdır.</span>
-          <span>{site.taxOffice} — {site.taxNo}</span>
+          {site.taxOffice && !site.taxOffice.startsWith("[") ? <span>{site.taxOffice} — {site.taxNo}</span> : <span />}
         </div>
       </div>
     </footer>
