@@ -10,6 +10,7 @@ import JsonLd from "@/components/JsonLd";
 import { branches, byBranch, getService, services, type Branch } from "@/data/services";
 import { site } from "@/data/site";
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { mdToHtml } from "@/lib/markdown";
 import { bannerImage, serviceImage } from "@/lib/images";
 
 type Params = Promise<{ slug: string }>;
@@ -22,10 +23,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const b = branchBySlug(slug);
-  if (b) return { title: branches[b].title, description: branches[b].desc };
+  if (b) return { title: branches[b].title, description: branches[b].desc, alternates: { canonical: `${site.url}/hizmetler/${branches[b].slug}` } };
   const s = getService(slug);
   if (!s) return {};
-  return { title: `${s.title} | ${site.city}`, description: s.short };
+  return {
+    title: s.metaTitle ?? `${s.title} | ${site.city}`,
+    description: s.metaDescription ?? s.short,
+    alternates: { canonical: `${site.url}/hizmetler/${s.slug}` },
+  };
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -54,15 +59,21 @@ export default async function Page({ params }: { params: Params }) {
   const br = branches[s.branch];
   const related = byBranch(s.branch).filter((x) => x.slug !== s.slug).slice(0, 3);
   const url = `${site.url}/hizmetler/${s.slug}`;
+  const bodyHtml = s.body ? await mdToHtml(s.body) : null;
   return (
     <>
       <JsonLd data={serviceJsonLd(s.title, s.short, url)} />
       {s.faq.length > 0 && <JsonLd data={faqJsonLd(s.faq)} />}
       <JsonLd data={breadcrumbJsonLd([{ name: "Ana Sayfa", url: site.url }, { name: br.title, url: `${site.url}/hizmetler/${br.slug}` }, { name: s.title, url }])} />
-      <PageHeader kicker={br.title} title={s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} image={serviceImage(s.slug) ?? bannerImage("hizmetler")} />
+      <PageHeader kicker={br.title} title={s.h1 ?? s.title} lead={s.intro} crumbs={[{ name: "Hizmetler", href: "/hizmetler" }, { name: br.title, href: `/hizmetler/${br.slug}` }, { name: s.title }]} image={serviceImage(s.slug) ?? bannerImage("hizmetler")} />
 
       <section className="container-x py-14 grid lg:grid-cols-[1fr_340px] gap-10">
         <div>
+          {bodyHtml && (
+            <Reveal className="prose-x mb-12" >
+              <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+            </Reveal>
+          )}
           <Reveal><h2 className="text-2xl font-bold">Ne yapıyoruz?</h2></Reveal>
           <div className="mt-5 card divide-y divide-line">
             {s.bullets.map((x, i) => <Reveal key={x} delay={i * 60} className="px-6 py-4 flex gap-3"><span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" /><span>{x}</span></Reveal>)}
