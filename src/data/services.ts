@@ -33,7 +33,7 @@ export const branches: Record<Branch, { slug: string; name: string; title: strin
     name: "IT",
     title: "IT Çözümleri",
     claim: "Altyapınızı güvenli ve kesintisiz tutun.",
-    desc: "Kurumsal IT, network, bilgisayar sistemleri, kamera & alarm ve yerinde teknik destek.",
+    desc: "Kurumsal IT, network, bilgisayar sistemleri, kamera & alarm ve teknik destek.",
   },
 };
 
@@ -99,13 +99,60 @@ export const services: Service[] = [
   },
   {
     slug: "kurumsal-it", branch: "it", title: "Kurumsal IT",
-    short: "Ofisinizin tüm IT sürecini planlıyor, kuruyor ve yönetiyoruz.",
-    intro: "Bilgisayar, sunucu, yedekleme, e-posta ve kullanıcı yönetimi — işletmenizin IT tarafını tek muhatapla yürütüyoruz.",
-    bullets: ["IT envanteri ve ihtiyaç analizi", "Kullanıcı, e-posta ve lisans yönetimi", "Yedekleme ve veri güvenliği", "Sunucu / NAS kurulumu", "Aylık bakım ve raporlama"],
-    outcomes: ["Arızada işin durmaması", "Verinin güvende ve yedekli olması", "Sabit aylık bütçe, sürprizsiz IT"],
+    h1: "İşletmeler İçin Kurumsal BT Yönetimi ve Bakım Sözleşmesi",
+    metaTitle: "Kurumsal BT Desteği ve Ofis Bakım Sözleşmesi | İşletmelere Özel",
+    metaDescription: "Ofisler, klinikler, fabrikalar ve şirketler için kurumsal BT yönetimi. Sözleşmeli aylık bakım, envanter yönetimi, yedekleme ve öncelikli müdahale. Yalnızca kurumsal müşterilere hizmet verilir.",
+    short: "Ofisinizin tüm BT sürecini planlıyor, kuruyor ve sözleşmeyle yönetiyoruz.",
+    intro: "Şirketler, ofisler ve kurumlar için BT altyapısının planlanması, kurulumu ve sözleşmeli yönetimi. Bu hizmet yalnızca ticari işletmelere sunulur; bireysel kullanıcılara yönelik bir hizmet değildir.",
+    bullets: ["BT envanteri, lisans ve kullanıcı yönetimi", "Sözleşmeli aylık yönetim ve raporlama", "Yedekleme politikası ve veri güvenliği", "Sunucu, NAS ve ağ altyapısı yönetimi", "Yeni personel ve cihaz kurulum süreçleri", "Öncelikli kurumsal müdahale"],
+    outcomes: ["Operasyonun arızada durmaması", "Sabit aylık BT bütçesi", "Tek muhatap, sözleşmeli hizmet", "Denetlenebilir envanter ve raporlama", "Veri kaybı riskinin azalması", "Büyüdükçe ölçeklenen altyapı"],
     faq: [
-      { q: "Sözleşme zorunlu mu?", a: "Hayır; tek seferlik kurulum da yapıyoruz. Ancak kurumsal müşterilerin çoğu aylık bakım sözleşmesini tercih ediyor." },
+      { q: "Bu hizmeti bireysel kullanıcılar alabilir mi?", a: "Hayır. Kurumsal BT yönetimi yalnızca ticari işletmelere, kurumlara ve ofislere sunulur. Hizmet, vergi mükellefi işletmelerle sözleşme karşılığında yürütülür." },
+      { q: "En az kaç cihazdan itibaren anlamlı oluyor?", a: "Genellikle beş cihazın üzerindeki ofislerde sözleşmeli yönetim, tek tek müdahaleden hem daha ucuz hem daha düzenli oluyor. Daha küçük ekiplerde de çalışıyoruz; keşifte birlikte değerlendiriyoruz." },
+      { q: "Sözleşme nasıl işliyor?", a: "Önce BT envanteri çıkarılır: kaç cihaz, hangi yazılımlar, hangi lisanslar, yedekleme durumu ne. Buna göre aylık kapsam ve ücret belirlenir, yazılı sözleşme imzalanır. Kapsam dışı işler ayrıca fiyatlandırılır ve onayınız alınır." },
+      { q: "Ofisimizde BT sorumlusu var, yine de çalışabilir miyiz?", a: "Evet. Birçok işletmede iç ekip günlük işleri yürütüyor, biz altyapı, yedekleme ve kritik müdahale tarafında destek veriyoruz. Kapsamı birlikte belirliyoruz." },
+      { q: "Faturalı ve sözleşmeli mi çalışıyorsunuz?", a: "Evet. Tüm kurumsal işlerimiz faturalı ve yazılı sözleşmeyle yürütülür. Yapılan işlemler aylık rapor halinde tarafınıza iletilir." },
+      { q: "Hangi bölgelerde hizmet veriyorsunuz?", a: "Beylikdüzü ve Esenyurt başta olmak üzere İstanbul Avrupa Yakası genelindeki işletmelere hizmet veriyoruz. Uzaktan yönetim tarafında konum kısıtı bulunmuyor." },
     ],
+    body: `## Kurumsal BT'yi tek muhatapla yürütün
+
+Bir işletmede BT, arıza çıktığında akla gelen bir şey olmaktan çıkıp yönetilen bir süreç haline geldiğinde maliyeti düşer. Nevatro olarak ofisler, klinikler, üretim tesisleri ve şirket merkezleri için BT altyapısını sözleşmeli olarak yönetiyoruz.
+
+Bu hizmet kapsamında çalıştığımız taraf kurumsal operasyondur: kullanıcı ve lisans yönetimi, yedekleme politikası, ağ altyapısı, sunucu ve depolama, yeni personel kurulum süreçleri ve bunların raporlanması.
+
+## Neden sözleşmeli yönetim?
+
+**Bütçe öngörülebilir olur.** Her arızada ayrı pazarlık yerine aylık sabit tutar. Yıllık BT giderinizi baştan biliyorsunuz.
+
+**Arıza büyümeden yakalanır.** Disk sağlığı, yedek kontrolü, güncellemeler düzenli izlendiğinde çoğu problem sizin haberiniz olmadan kapanır.
+
+**Kurumsal hafıza oluşur.** Hangi cihaz kimde, hangi lisans ne zaman bitiyor, yedek nereye alınıyor — hepsi kayıt altında. Personel değişse bile bilgi şirkette kalır.
+
+**Tek muhatap.** Ağ ayrı firma, bilgisayarlar ayrı firma, kamera başka firma olduğunda arıza anında herkes diğerini işaret eder. Tek sözleşmede bu sorun ortadan kalkar.
+
+## Kapsam
+
+**Envanter ve lisans yönetimi.** Cihaz listesi, garanti ve lisans takibi, zimmet kayıtları.
+
+**Yedekleme ve veri güvenliği.** Kritik verinin belirlenmesi, otomatik yedekleme kurulumu, geri dönüş testleri ve düzenli kontrol.
+
+**Ağ ve sunucu altyapısı.** Yapısal kablolama, switch ve firewall yönetimi, kurumsal Wi-Fi, sunucu ve NAS kurulumu.
+
+**Kullanıcı süreçleri.** Yeni personel cihaz kurulumu, e-posta ve erişim tanımları, ayrılan personelde erişim kapatma.
+
+**Aylık raporlama.** Yapılan işlemler, açık konular ve öneriler yazılı olarak iletilir.
+
+## Nasıl başlıyoruz?
+
+Önce keşif yapılır ve BT envanteri çıkarılır. Mevcut durumun fotoğrafı çekildikten sonra kapsam, hizmet seviyesi ve aylık ücret belirlenir; yazılı sözleşmeyle başlanır.
+
+İlk ay genellikle düzenleme ayıdır: eksik yedekler kurulur, kablolama etiketlenir, envanter kayda geçer. Sonrasında sistem rutine oturur.
+
+## Kimlere hizmet veriyoruz?
+
+Ofisler, plazalar, klinik ve muayenehaneler, üretim tesisleri ve depolar, okul ve kurslar, çok şubeli işletmeler. Kurumsal BT yönetimi ticari işletmelere yönelik bir hizmettir.
+
+Beylikdüzü ve Esenyurt başta olmak üzere İstanbul genelindeki işletmelerle çalışıyoruz; uzaktan yönetim tarafında konum kısıtı bulunmuyor.`,
   },
   {
     slug: "network-altyapi", branch: "it", title: "Network & Altyapı",
@@ -119,17 +166,17 @@ export const services: Service[] = [
   },
   {
     slug: "bilgisayar-sistemleri", branch: "it", title: "Bilgisayar Sistemleri",
-    h1: "Bilgisayar Tamiri ve Yerinde Teknik Servis",
-    metaTitle: "Bilgisayar Tamiri Beylikdüzü, Esenyurt, Avcılar | Yerinde Servis",
-    metaDescription: "Beylikdüzü, Esenyurt ve Avcılar'da yerinde bilgisayar tamiri ve teknik servis. Arıza tespiti ücretsiz, aynı gün müdahale, faturalı ve garantili işçilik.",
-    short: "Kurulum, bakım ve yerinde teknik servis.",
-    intro: "Masaüstü ve dizüstü bilgisayarlarda arıza tespiti, onarım, format, donanım yükseltme ve periyodik bakım. Beylikdüzü, Esenyurt ve Avcılar'da yerinde servis; arıza tespiti ücretsiz.",
-    bullets: ["Ücretsiz arıza tespiti ve ön bilgilendirme", "Yerinde onarım — cihazı bırakmanıza gerek yok", "Donanım yükseltme (SSD, RAM) ile hızlandırma", "Format, işletim sistemi ve veri aktarımı", "Virüs ve fidye yazılımı temizliği", "Kurumsal cihazlar için periyodik bakım"],
-    outcomes: ["Yavaşlayan cihaz yenilemeden hızlanır", "Veriniz kaybolmadan geri gelir", "Aynı gün yerinde müdahale", "Faturalı, garantili işçilik", "Tek muhatap, tek numara", "İş kaybı en aza iner"],
+    h1: "Bilgisayar Tamiri ve Teknik Servis",
+    metaTitle: "Bilgisayar Tamiri Beylikdüzü – Esenyurt | Aynı Gün Teknik Servis",
+    metaDescription: "Beylikdüzü ve Esenyurt'ta bilgisayar tamiri ve teknik servis. Arıza tespiti ücretsiz, çoğu arızada aynı gün teslim, faturalı ve garantili işçilik.",
+    short: "Arıza tespiti, onarım, yükseltme ve periyodik bakım.",
+    intro: "Masaüstü ve dizüstü bilgisayarlarda arıza tespiti, onarım, format, donanım yükseltme ve periyodik bakım. Esenyurt'taki servisimizde ya da gerektiğinde yerinde. Arıza tespiti ücretsiz.",
+    bullets: ["Ücretsiz arıza tespiti ve ön bilgilendirme", "Serviste ya da gerektiğinde yerinde çözüm", "Donanım yükseltme (SSD, RAM) ile hızlandırma", "Format, işletim sistemi ve veri aktarımı", "Virüs ve fidye yazılımı temizliği", "Kurumsal cihazlar için periyodik bakım"],
+    outcomes: ["Yavaşlayan cihaz yenilemeden hızlanır", "Veriniz kaybolmadan geri gelir", "Çoğu arızada aynı gün teslim", "Faturalı, garantili işçilik", "Tek muhatap, tek numara", "İş kaybı en aza iner"],
     faq: [
-      { q: "Cihazı size getirmem mi gerekiyor?", a: "Hayır. Beylikdüzü, Esenyurt ve Avcılar'da yerinde servis veriyoruz; işlemlerin büyük kısmını sizin ofisinizde ya da evinizde tamamlıyoruz. Yalnızca laboratuvar gerektiren durumlarda (örneğin ileri seviye anakart onarımı) cihazı yanımıza alıyoruz ve bunu baştan söylüyoruz." },
-      { q: "Arıza tespiti ücretli mi?", a: "Hayır. Yerinde arıza tespiti ve fiyat bilgisi ücretsiz. Ne yapılacağını ve ne kadar tutacağını öğrendikten sonra işlemi onaylamama hakkınız var; onaylamazsanız hiçbir ücret çıkmaz." },
-      { q: "Ne kadar sürede gelebiliyorsunuz?", a: "Beylikdüzü, Esenyurt ve Avcılar öncelikli hizmet bölgemiz; mesai saatleri içinde gelen taleplerin çoğuna aynı gün dönüyoruz. Yazılım kaynaklı sorunlarda önce uzaktan bağlanıp deniyoruz, çözülürse beklemenize bile gerek kalmıyor." },
+      { q: "Cihazı getirmem mi gerekiyor?", a: "Servisimiz Esenyurt'ta, İnciler Çarşısı'nda; Beylikdüzü sınırında, Marmara Park yakınında. Cihazı getirebilirsiniz; çoğu arızada aynı gün teslim ediyoruz. Ofiste birden fazla cihaz varsa ya da taşımak zor geliyorsa yerinde de bakabiliyoruz — telefonda birlikte karar veriyoruz." },
+      { q: "Arıza tespiti ücretli mi?", a: "Hayır. Arıza tespiti ve fiyat bilgisi ücretsiz. Ne yapılacağını ve ne kadar tutacağını öğrendikten sonra işlemi onaylamama hakkınız var; onaylamazsanız hiçbir ücret çıkmaz." },
+      { q: "Ne kadar sürer?", a: "Format, SSD takma, temizlik gibi standart işler çoğunlukla aynı gün bitiyor. Parça gerektiren onarımlarda süreyi tespitte söylüyoruz. Yazılım kaynaklı sorunlarda önce uzaktan bağlanıp deniyoruz; çözülürse gelmenize gerek kalmıyor." },
       { q: "Verilerim kaybolur mu?", a: "Format ve işletim sistemi kurulumu öncesinde verilerinizi yedekliyoruz. Disk arızalıysa önce kurtarma denemesi yapıyor, şansı ve maliyeti size söyledikten sonra devam ediyoruz. Onayınız olmadan hiçbir veri silinmiyor." },
       { q: "Ne kadar tutar?", a: "İşleme göre değişir. Format ve kurulum, SSD takma, temizlik-bakım gibi standart işlerde fiyat keşifte netleşir ve yazılı verilir. Parça gerekiyorsa parça ve işçilik ayrı ayrı gösterilir; sürpriz kalem çıkarmıyoruz." },
       { q: "Bilgisayarı yenilesem mi, tamir mi ettirsem?", a: "Çoğu zaman gerek yok. 5-6 yaşındaki bir bilgisayarda SSD ve RAM yükseltmesi cihazı gözle görülür şekilde hızlandırıyor ve yeni cihaz almanın çok altında maliyetle çözüyor. Tespitte hangisinin mantıklı olduğunu rakamla söylüyoruz — yenilemek gerekiyorsa da onu söylüyoruz." },
@@ -156,9 +203,9 @@ Biz önce ölçüyoruz. Disk sağlığı, bellek testi, ısı değerleri ve aç�
 
 ## Nasıl çalışıyoruz?
 
-Telefonla ya da WhatsApp'tan durumu anlatıyorsunuz. Yazılım kaynaklı görünen sorunlarda önce uzaktan bağlanmayı deniyoruz — çözülürse yerinde servise gerek kalmıyor.
+Telefonla ya da WhatsApp'tan durumu anlatıyorsunuz. Yazılım kaynaklı görünen sorunlarda önce uzaktan bağlanmayı deniyoruz — çözülürse gelmenize gerek kalmıyor.
 
-Yerinde müdahale gerekiyorsa gün ve saat belirliyoruz. Tespitten sonra ne yapılacağını ve ne tutacağını söylüyoruz; onaylarsanız işleme geçiyoruz. Parça gerekiyorsa parça ve işçilik ayrı gösteriliyor.
+Cihazı servise getiriyorsunuz ya da gerekiyorsa gün ve saat belirleyip biz geliyoruz. Tespitten sonra ne yapılacağını ve ne tutacağını söylüyoruz; onaylarsanız işleme geçiyoruz. Parça gerekiyorsa parça ve işçilik ayrı gösteriliyor.
 
 İş bittiğinde cihazı çalışır halde teslim ediyor, yapılan işlemleri yazılı olarak bırakıyoruz. Sonrasında bir sorun olursa aranacak numara belli.
 
@@ -168,9 +215,9 @@ Beş cihazın üstüne çıkan ofislerde tek tek arıza gidermek yerine bakım s
 
 Bu yapı özellikle muhasebe, teklif ve müşteri verisinin tek bir bilgisayarda durduğu işletmeler için önemli. O cihaz bozulduğunda iş günlerce durabilir; düzenli kontrol ve yedekleme bunu baştan engelliyor.
 
-## Hizmet bölgemiz
+## Adres ve hizmet bölgesi
 
-Beylikdüzü, Esenyurt ve Avcılar öncelikli bölgemiz — buralara aynı gün dönüyoruz. Büyükçekmece, Başakşehir, Küçükçekmece ve çevresine de yerinde servis veriyoruz, keşfi genellikle 1-2 iş günü içinde planlıyoruz.`,
+Servisimiz Esenyurt'ta, İnciler Çarşısı'nda; Beylikdüzü sınırında, Marmara Park yakınında. Beylikdüzü ve Esenyurt'tan gelen taleplere aynı gün dönüyoruz. Avcılar, Büyükçekmece, Başakşehir ve Küçükçekmece'ye de hizmet veriyoruz; ofis ve işyerlerinde gerekirse yerinde bakım yapıyoruz.`,
   },
   {
     slug: "kamera-alarm", branch: "it", title: "Kamera & Alarm Sistemleri",
@@ -184,9 +231,9 @@ Beylikdüzü, Esenyurt ve Avcılar öncelikli bölgemiz — buralara aynı gün 
   },
   {
     slug: "teknik-destek", branch: "it", title: "Teknik Destek & Bakım",
-    short: "Kurulum sonrası yerinde ve uzaktan destek, planlı bakım.",
-    intro: "Kurduğumuz her sistem için yerinde ve uzaktan teknik destek. Bakım sözleşmesiyle arızayı büyümeden yakalıyoruz.",
-    bullets: ["Uzaktan bağlantıyla hızlı müdahale", "Yerinde servis", "Planlı periyodik kontrol", "Öncelikli arıza yanıtı", "Aylık durum raporu"],
+    short: "Kurulum sonrası teknik destek ve planlı bakım.",
+    intro: "Kurduğumuz her sistem için uzaktan ve gerektiğinde yerinde teknik destek. Bakım sözleşmesiyle arızayı büyümeden yakalıyoruz.",
+    bullets: ["Uzaktan bağlantıyla hızlı müdahale", "Gerektiğinde yerinde müdahale", "Planlı periyodik kontrol", "Öncelikli arıza yanıtı", "Aylık durum raporu"],
     outcomes: ["Tek numara, tek muhatap", "Sabit aylık maliyet", "Daha az kesinti"],
     faq: [],
   },
